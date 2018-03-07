@@ -7,5 +7,5 @@ cd crayon-cli
 npm link
 mkdir ../crayon-dev
 cd ../crayon-dev
-npm link crayon-cli
+npm link crayon
 ```
