@@ -1,21 +1,14 @@
 #!/usr/bin/env node
-const prog = require('caporal');
-prog
-  .version('1.0.0')
-  // you specify arguments using .argument()
-  // 'app' is required, 'env' is optional
-  .command('deploy', 'Deploy an application')
-  .argument('<app>', 'App to deploy', /^myapp|their-app$/)
-  .argument('[env]', 'Environment to deploy on', /^dev|staging|production$/, 'local')
-  // you specify options using .option()
-  // if --tail is passed, its value is required
-  .option('--tail <lines>', 'Tail <lines> lines of logs after deploy', prog.INT)
-  .action(function(args, options, logger) {
-    // args and options are objects
-    // args = {"app": "myapp", "env": "production"}
-    // options = {"tail" : 100}
-  });
+const crayon = require('caporal');
+const glob = require('glob');
+const { version } = require('./package.json');
+const commands = glob.sync(`${__dirname}/commands/*/index.js`);
 
-prog.parse(process.argv);
+// Set the version from the package.json
+crayon.version(version);
 
-// ./myprog deploy myapp production --tail 100
+// Register each command
+commands.forEach(require);
+
+// Parse the CLI arguments to decide which command to execute
+crayon.parse(process.argv);
