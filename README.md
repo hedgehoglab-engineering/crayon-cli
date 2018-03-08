@@ -11,6 +11,7 @@ npm i -g netsells/crayon-cli
 ## Commands
 
 `make:repository <name>` - create a JavaScript repository in your project
+`add:vuex` - adds Vuex to your project and sets up a boilerplate store
 
 ## Contributing
 
