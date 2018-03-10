@@ -5,16 +5,19 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint ./index.js ./build/**/*.js ./commands/**/*.js ./utils/**.*.js --fix",
-    "generate": "node ./build"
+    "generate": "node ./dev/generate-readme",
+    "make:command": "node ./dev/make-command"
   },
   "dependencies": {
     "caporal": "^0.10.0",
-    "glob": "^7.1.2"
+    "glob": "^7.1.2",
+    "inquirer": "^5.1.0"
   },
   "devDependencies": {
     "eslint": "^4.10.0",
     "eslint-config-netsells": "netsells/eslint-config-netsells",
-    "husky": "^0.15.0-rc.8"
+    "husky": "^0.15.0-rc.8",
+    "slug": "^0.9.1"
   },
   "bin": {
     "crayon": "./index.js"
