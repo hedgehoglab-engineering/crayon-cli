@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint ./index.js ./build/**/*.js ./commands/**/*.js ./utils/**.*.js --fix",
+    "lint": "eslint ./**/*.js --fix",
     "generate": "node ./dev/generate-readme",
     "make:command": "node ./dev/make-command"
   },
