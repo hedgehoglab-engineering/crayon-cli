@@ -54,4 +54,4 @@ npm run make:command
 
 The command will run through a few questions to generate some boilerplate to get you going.
 
-The CLI is powered by (Caporal)[https://github.com/mattallty/Caporal.js] so visit the docs for details on how to put together new commands.
+The CLI is powered by [Caporal](https://github.com/mattallty/Caporal.js) so visit the docs for details on how to put together new commands.
