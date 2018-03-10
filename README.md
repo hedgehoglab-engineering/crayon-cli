@@ -10,7 +10,26 @@ npm i -g netsells/crayon-cli
 
 ## Commands
 
-`make:repository <name>` - create a JavaScript repository in your project
+```
+   crayon 1.0.0 
+
+   USAGE
+
+     crayon make:repository <name>
+
+   ARGUMENTS
+
+     <name>      Repository name      required      
+
+   GLOBAL OPTIONS
+
+     -h, --help         Display help                                      
+     -V, --version      Display version                                   
+     --no-color         Disable colors                                    
+     --quiet            Quiet mode - only displays warn and error messages
+     -v, --verbose      Verbose mode - will also output debug messages    
+
+```
 
 ## Contributing
 

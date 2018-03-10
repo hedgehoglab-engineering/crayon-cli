@@ -3,11 +3,25 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "lint": "eslint ./index.js ./build/**/*.js ./commands/**/*.js ./utils/**.*.js --fix",
+    "generate": "node ./build"
+  },
   "dependencies": {
     "caporal": "^0.10.0",
     "glob": "^7.1.2"
   },
+  "devDependencies": {
+    "eslint": "^4.10.0",
+    "eslint-config-netsells": "netsells/eslint-config-netsells",
+    "husky": "^0.15.0-rc.8"
+  },
   "bin": {
     "crayon": "./index.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run generate && git add README.md"
+    }
   }
 }
