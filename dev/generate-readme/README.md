@@ -10,28 +10,7 @@ npm i -g netsells/crayon-cli
 
 ## Commands
 
-```bash
-   crayon 1.0.0 
-
-   USAGE
-
-     crayon <command> [options]
-
-   COMMANDS
-
-     add:vuex                    Adds Vuex to your project          
-     make:repository <name>      Make a repository                  
-     help <command>              Display help for a specific command
-
-   GLOBAL OPTIONS
-
-     -h, --help         Display help                                      
-     -V, --version      Display version                                   
-     --no-color         Disable colors                                    
-     --quiet            Quiet mode - only displays warn and error messages
-     -v, --verbose      Verbose mode - will also output debug messages    
-
-```
+```bash{{CRAYON_OUTPUT}}```
 
 ## Contributing
 
