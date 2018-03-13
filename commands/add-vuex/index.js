@@ -1,8 +1,9 @@
 const crayon = require('caporal');
 const fs = require('fs');
 const path = require('path');
+const chalk = require('chalk');
 const mkdir = require('../../utils/mkdir.js');
-const { exec } = require('child_process');
+const exec = require('../../utils/execute.js');
 
 crayon.command('add:vuex', 'Adds Vuex to your project')
     .action((args, options, logger) => {
@@ -11,7 +12,10 @@ crayon.command('add:vuex', 'Adds Vuex to your project')
          * Install Vuex
          */
 
-        exec('yarn add vuex');
+        exec('yarn add vuex')
+            .catch((err) => {
+                logger.error(chalk.red(`ERROR: ${err.stderr}`));
+            });
 
         /*
          * Create store
@@ -45,4 +49,5 @@ crayon.command('add:vuex', 'Adds Vuex to your project')
         // Write app.js with new lines
         fs.writeFileSync(`${process.cwd()}/js/app.js`, app_js_array.join('\n'));
 
+        logger.info(chalk.green(`Vuex installed successfully.`));
     });
