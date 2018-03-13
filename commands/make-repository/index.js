@@ -1,11 +1,12 @@
 const crayon = require('caporal');
 const fs = require('fs');
 const path = require('path');
+const chalk = require('chalk');
 const mkdir = require('../../utils/mkdir.js');
 
 crayon.command('make:repository', 'Make a repository')
     .argument('<name>', 'Repository name')
-    .action((args) => {
+    .action((args, options, logger) => {
         const stub = fs.readFileSync(path.resolve(`${__dirname}/stubs/StubRepository.js`), 'utf8');
         const entityName = args.name[0].toUpperCase() + args.name.slice(1);
         const repositoryName = `${entityName}Repository`;
@@ -17,4 +18,6 @@ crayon.command('make:repository', 'Make a repository')
 
         // Create the file
         fs.writeFileSync(`${repositoryLocation}/${repositoryName}.js`, repositoryContent);
+        
+        logger.info(chalk.green(`${repositoryName} created successfully.`));
     });

@@ -1,7 +1,7 @@
 const fs = require('fs');
-const execute = require('../utils/execute');
+const execute = require('../../utils/execute');
 const templateFile = fs.readFileSync(`${__dirname}/README.md`, 'utf8');
-const outputFile = `${__dirname}/../README.md`;
+const outputFile = `${__dirname}/../../README.md`;
 
 // Run the command and get the output
 execute('crayon').then((commandOutput) => {
