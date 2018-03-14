@@ -1,6 +1,5 @@
 const slug = require('slug');
-const fs = require('fs');
-const mkdir = require('../../utils/mkdir');
+const fs = require('fs-extra');
 const inquirer = require('inquirer');
 const chalk = require('chalk');
 const commandStub = fs.readFileSync(`${__dirname}/stubs/command.js`, 'utf8');
@@ -55,7 +54,7 @@ inquirer.prompt([
         .replace('{{DESCRIPTION}}', description);
 
     // Make the command directory
-    mkdir(outputDirectory);
+    fs.mkdirpSync(outputDirectory);
 
     // Write the command file with basic command boilerplate
     fs.writeFileSync(`${outputDirectory}/index.js`, output);
