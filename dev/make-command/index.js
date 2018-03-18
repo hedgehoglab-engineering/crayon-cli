@@ -3,16 +3,13 @@ const fs = require('fs-extra');
 const inquirer = require('inquirer');
 const chalk = require('chalk');
 const commandStub = fs.readFileSync(`${__dirname}/stubs/command.js`, 'utf8');
-
-// Generate a the output path for the command
-const commandDirectory = (command) => {
-    const directory = command.replace(/:/g, '-');
-
-    return `${process.cwd()}/commands/${slug(command)}`;
-}
+const testStub = fs.readFileSync(`${__dirname}/stubs/test.js`, 'utf8');
 
 // Replace colons with hyphens
 slug.charmap[':'] = '-';
+
+// Generate a the output path for the command
+const commandDirectory = (command) => `${process.cwd()}/commands/${slug(command)}`;
 
 inquirer.prompt([
     {
@@ -53,11 +50,15 @@ inquirer.prompt([
         .replace('{{COMMAND}}', command)
         .replace('{{DESCRIPTION}}', description);
 
-    // Make the command directory
-    fs.mkdirpSync(outputDirectory);
-
     // Write the command file with basic command boilerplate
-    fs.writeFileSync(`${outputDirectory}/index.js`, output);
+    fs.outputFileSync(`${outputDirectory}/index.js`, output);
+
+    // Generate the test boilerplate
+    const testOutput = testStub
+        .replace(/{{COMMAND}}/g, command);
+
+    // Write the test file with basic failing test boilerplate
+    fs.outputFileSync(`./tests/${slug(command)}.test.js`, testOutput);
     
     console.log('\n' + chalk.green(`Command [${command}] created successfully.`));
 });

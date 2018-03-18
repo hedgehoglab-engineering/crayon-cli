@@ -7,7 +7,7 @@
     "lint": "eslint ./**/*.js --fix",
     "generate": "node ./dev/generate-readme",
     "make:command": "node ./dev/make-command",
-    "test": "jest"
+    "test": "jest tests/"
   },
   "dependencies": {
     "caporal": "^0.10.0",
