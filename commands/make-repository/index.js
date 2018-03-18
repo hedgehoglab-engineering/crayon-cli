@@ -1,11 +1,9 @@
-const { toCamelCase } = require('../../utils');
-
-const { generateOutputPath, generateRepositoryName } = require('./utils');
-
 const crayon = require('caporal');
 const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
+const { toCamelCase } = require('../../utils');
+const { generateOutputPath, generateRepositoryName } = require('./utils');
 
 crayon.command('make:repository', 'Make a repository')
     .argument('<name>', 'Repository name')
