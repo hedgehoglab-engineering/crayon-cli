@@ -35,19 +35,19 @@ crayon.command('add:vuex', 'Adds Vuex to your project')
 
         // Read app.js
         const app_js = fs.readFileSync(`${process.cwd()}/js/app.js`, 'utf8');
-        const app_js_array = app_js.split('\n');
+        const appJsArray = app_js.split('\n');
 
         // Insert store import
-        app_js_array.splice(1, 0, 'import store from \'./store\';');
-        app_js_array.splice(2, 0, 'import Vuex from \'vuex\';');
-        app_js_array.splice(3, 0, 'Vue.use(Vuex)');
+        appJsArray.splice(1, 0, 'import store from \'./store\';');
+        appJsArray.splice(2, 0, 'import Vuex from \'vuex\';');
+        appJsArray.splice(3, 0, 'Vue.use(Vuex)');
 
         // Insert store into vue initialise
-        const new_vue_index = app_js_array.indexOf('new Vue({');
-        app_js_array.splice(new_vue_index+1, 0, '    store,');
+        const new_vue_index = appJsArray.indexOf('new Vue({');
+        appJsArray.splice(new_vue_index+1, 0, '    store,');
 
         // Write app.js with new lines
-        fs.writeFileSync(`${process.cwd()}/js/app.js`, app_js_array.join('\n'));
+        fs.writeFileSync(`${process.cwd()}/js/app.js`, appJsArray.join('\n'));
 
         logger.info(chalk.green(`Vuex installed successfully.`));
     });
