@@ -21,14 +21,13 @@ crayon.command('add:vuex', 'Adds Vuex to your project')
          // Create store/index.js
          const defaultStore = fs.readFileSync(path.resolve(`${__dirname}/stubs/index.js`), 'utf8');
          fs.writeFileSync(`${storeLocation}/index.js`, defaultStore);
-         fs.copySync(path.resolve(`${__dirname}/stubs/modules`), storeLocation);
 
         // Read app.js
         const appJs = fs.readFileSync(`${process.cwd()}/js/app.js`, 'utf8');
         const appJsArray = appJs.split('\n');
 
         // Insert store import
-        appJsArray.splice(0, 0, 'import store from \'./store\';');
+        appJsArray.splice(0, 0, `import store from './store';`);
 
         // Insert store into vue initialise
         const newVueIndex = appJsArray.indexOf('new Vue({');
