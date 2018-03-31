@@ -1,3 +1,9 @@
 {
-    "extends": "netsells"
+    "extends": "netsells",
+    "globals": {
+        "describe": true,
+        "afterAll": true,
+        "expect": true,
+        "test": true
+    }
 }

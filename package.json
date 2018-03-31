@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "eslint ./**/*.js --fix",
     "generate": "node ./dev/generate-readme",
-    "make:command": "node ./dev/make-command"
+    "make:command": "node ./dev/make-command",
+    "test": "jest tests/"
   },
   "dependencies": {
     "caporal": "^0.10.0",
@@ -16,8 +17,9 @@
   },
   "devDependencies": {
     "eslint": "^4.10.0",
-    "eslint-config-netsells": "netsells/eslint-config-netsells",
+    "eslint-config-netsells": "github:netsells/eslint-config-netsells",
     "husky": "^0.15.0-rc.8",
+    "jest": "^22.4.2",
     "slug": "^0.9.1"
   },
   "bin": {
@@ -25,7 +27,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm run generate && git add README.md"
+      "pre-commit": "npm run test && npm run lint && npm run generate && git add README.md"
     }
   }
 }
