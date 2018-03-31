@@ -3,38 +3,45 @@ const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
 const exec = require('../../utils/execute.js');
+const jsDir = `${process.cwd()}/resources/assets/js`;
+const appEntry = `${jsDir}/app.js`;
+const storeLocation = `${jsDir}/store`;
+const storeStub = fs.readFileSync(path.resolve(`${__dirname}/stubs/index.js`), 'utf8');
 
 crayon.command('add:vuex', 'Adds Vuex to your project')
     .action((args, options, logger) => {
-    
-        // Install Vuex
-
-        exec('yarn add vuex')
-            .catch(({ stderr }) => {
-                logger.error(chalk.red(`ERROR: ${stderr}`));
-            });
-
-         // Create store
-         const storeLocation = `${process.cwd()}/js/store`;
-         fs.ensureDirSync(storeLocation);
-
-         // Create store/index.js
-         const defaultStore = fs.readFileSync(path.resolve(`${__dirname}/stubs/index.js`), 'utf8');
-         fs.writeFileSync(`${storeLocation}/index.js`, defaultStore);
-
         // Read app.js
-        const appJs = fs.readFileSync(`${process.cwd()}/js/app.js`, 'utf8');
+        if (!fs.existsSync(appEntry)) {
+            return logger.error(chalk.red('App entry point not found.'));
+        }
+
+        const appJs = fs.readFileSync(appEntry, 'utf8');
         const appJsArray = appJs.split('\n');
 
         // Insert store import
-        appJsArray.splice(0, 0, `import store from './store';`);
+        appJsArray.splice(0, 0, 'import store from \'./store\';\n');
 
         // Insert store into vue initialise
+        if (!appJsArray.includes('new Vue({')) {
+            return logger.info(chalk.red('Please add Vue to your project first.'));
+        }
+
+        // Install Vuex
+        exec('yarn add vuex').catch(({ stderr }) => {
+            logger.error(chalk.red(`ERROR: ${stderr}`));
+        });
+
+        // Create store
+        fs.ensureDirSync(storeLocation);
+
+        // Create store/index.js
+        fs.writeFileSync(`${storeLocation}/index.js`, storeStub);
+
         const newVueIndex = appJsArray.indexOf('new Vue({');
         appJsArray.splice(newVueIndex + 1, 0, '    store,');
 
         // Write app.js with new lines
-        fs.writeFileSync(`${process.cwd()}/js/app.js`, appJsArray.join('\n'));
+        fs.writeFileSync(appEntry, appJsArray.join('\n'));
 
-        logger.info(chalk.green(`Vuex installed successfully.`));
+        logger.info(chalk.green('Vuex installed successfully.'));
     });

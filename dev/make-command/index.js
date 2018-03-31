@@ -17,7 +17,7 @@ inquirer.prompt([
         name: 'command',
         message: 'What is the command?',
         validate(value) {
-            if (!Boolean(value.length)) {
+            if (!value.length) {
                 return 'Please enter a command.';
             }
             if (value.includes(' ')) {
@@ -35,7 +35,7 @@ inquirer.prompt([
         name: 'description',
         message: 'Describe what the command does:',
         validate(value) {
-            if (!Boolean(value.length)) {
+            if (!value.length) {
                 return 'Please enter a description.';
             }
 
@@ -60,5 +60,5 @@ inquirer.prompt([
     // Write the test file with basic failing test boilerplate
     fs.outputFileSync(`./tests/${slug(command)}.test.js`, testOutput);
     
-    console.log('\n' + chalk.green(`Command [${command}] created successfully.`));
+    console.log(`\n${chalk.green(`Command [${command}] created successfully.`)}`);
 });

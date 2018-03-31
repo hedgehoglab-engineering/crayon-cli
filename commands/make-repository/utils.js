@@ -9,7 +9,7 @@ const OUTPUT_DIRECTORY = `${js_directory}/repositories`;
  *
  * @returns {string}
  */
-function generateRepositoryName (name) {
+function generateRepositoryName(name) {
     return `${toCamelCase(name)}Repository`;
 }
 
@@ -20,7 +20,7 @@ function generateRepositoryName (name) {
  *
  * @returns {string}
  */
-function generateOutputPath (name) {
+function generateOutputPath(name) {
     return `${OUTPUT_DIRECTORY}/${generateRepositoryName(name)}.js`;
 }
 
