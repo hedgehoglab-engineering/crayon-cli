@@ -19,15 +19,15 @@ npm i -g netsells/crayon-cli
 
    ARGUMENTS
 
-     <name>      Repository name      required      
+     <name>[90m [39m     Repository name[90m [39m     required[90m [39m     
 
    GLOBAL OPTIONS
 
-     -h, --help         Display help                                      
-     -V, --version      Display version                                   
-     --no-color         Disable colors                                    
-     --quiet            Quiet mode - only displays warn and error messages
-     -v, --verbose      Verbose mode - will also output debug messages    
+     -h, --help   [90m [39m     Display help                                      
+     -V, --version[90m [39m     Display version                                   
+     --no-color   [90m [39m     Disable colors                                    
+     --quiet      [90m [39m     Quiet mode - only displays warn and error messages
+     -v, --verbose[90m [39m     Verbose mode - will also output debug messages    
 
 ```
 

@@ -2,8 +2,7 @@
  * Convert a string to upper camelcase
  *
  * @example toCamelCase('a-string') => 'AString'
- *
- * @param string
+ * @param {string} string
  *
  * @return {string}
  */
