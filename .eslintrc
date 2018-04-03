@@ -2,6 +2,7 @@
     "extends": "netsells",
     "globals": {
         "describe": true,
+        "beforeAll": true,
         "afterAll": true,
         "expect": true,
         "test": true
