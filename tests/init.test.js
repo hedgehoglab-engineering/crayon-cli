@@ -31,7 +31,7 @@ describe('make:repository', () => {
     test('crayon initialize', () => {
         expect.assertions(1);
 
-        return exec('crayon init').then((output) => {
+        return exec('crayon init').then(() => {
             const fileExists = fs.existsSync(rcPath);
 
             expect(fileExists).toBe(true);
