@@ -14,7 +14,7 @@ crayon.command('make:repository', 'Make a repository')
         const repositoryContent = stub.replace(new RegExp('Stub', 'g'), entityName);
 
         // Create the file
-        fs.outputFileSync(generateOutputPath(args.name), repositoryContent);
+        fs.outputFileSync(path.resolve(generateOutputPath(args.name)), repositoryContent);
         
         logger.info(chalk.green(`${repositoryName} created successfully.`));
     });

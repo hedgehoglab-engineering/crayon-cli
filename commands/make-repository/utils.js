@@ -1,6 +1,6 @@
 const { toCamelCase } = require('../../utils');
-const { js_directory } = require('../../utils/config');
-const OUTPUT_DIRECTORY = `${js_directory}/repositories`;
+const { config } = require('../../utils/config');
+const OUTPUT_DIRECTORY = `${config.js_directory}/repositories`;
 
 /**
  * Generate the name of the repository

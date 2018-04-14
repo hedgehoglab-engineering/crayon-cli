@@ -5,25 +5,19 @@ const fs = require('fs-extra');
 const inquirer = require('inquirer');
 const commandStub = fs.readFileSync(`${__dirname}/stubs/command.js`, 'utf8');
 const testStub = fs.readFileSync(`${__dirname}/stubs/test.js`, 'utf8');
-const { env } = require('../../utils/config');
+const config = require('../../utils/config');
 
 // Replace colons with hyphens
 slug.charmap[':'] = '-';
 
-if (env !== 'dev') {
+if (config.get('env') !== 'dev') {
     return;
 }
 
 crayon
     .command('make:command', 'Generate boilerplate for a new crayon command')
     .argument('<command>', 'New command signature')
-    //.argument('[env]', 'Optional argument description')
-    //.option('--tail <lines>', 'Tail <lines> lines of logs after deploy', prog.INT)
-    .action((args, options, logger) => {
-        // args and options are objects
-        // args = {"app": "myapp", "env": "production"}
-        // options = {"tail" : 100}
-
+    .action(({ command }, options, logger) => {
         // Generate a the output path for the command
         const commandDirectory = (command) => `${process.cwd()}/commands/${slug(command)}`;
 
@@ -32,7 +26,7 @@ crayon
                 type: 'input',
                 name: 'command',
                 message: 'What is the command?',
-                default: args.command,
+                default: command,
                 validate(value) {
                     if (!Boolean(value.length)) {
                         return 'Please enter a command.';
@@ -76,7 +70,7 @@ crayon
 
             // Write the test file with basic failing test boilerplate
             fs.outputFileSync(`./tests/${slug(command)}.test.js`, testOutput);
-            
-            console.log('\n' + chalk.green(`Command [${command}] created successfully.`));
+
+            logger.info(chalk.green(`Command [${command}] created successfully.`));
         });
     });

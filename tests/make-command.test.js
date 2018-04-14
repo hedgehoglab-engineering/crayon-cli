@@ -1,32 +1,34 @@
 const exec = require('../utils/execute');
-const command = 'make:money';
 const config = require('../utils/config');
-
 
 describe('make:command', () => {
 
     afterAll(() => {
-        // Do some cleanup
+        config.reset();
     });
 
     test('is hidden in production', () => {
-        // expect.assertions(1);
-        expect(1).toBe(1);
+        config.write({
+            env: 'production',
+        }, './test/.crayonrc');
+
+        expect.assertions(1);
 
         return exec('crayon').then((output) => {
             expect(output).not.toContain('make:command');
         });
     });
 
-    // test('is visible in dev mode', () => {
-    //     expect.assertions(2);
+    test('is visible in dev mode', () => {
+        config.write({
+            env: 'dev',
+        }, './test/.crayonrc');
 
-    //     return exec(`crayon make:command ${repositoryName}`).then((output) => {
-    //         const fileExists = fs.existsSync(outputPath);
+        expect.assertions(1);
 
-    //         expect(output).toMatch(new RegExp(`${generateRepositoryName(repositoryName)} created successfully.`));
-    //         expect(fileExists).toBe(true);
-    //     });
-    // });
+        return exec('crayon').then((output) => {
+            expect(output).toContain('make:command');
+        });
+    });
 
 });
