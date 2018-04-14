@@ -4,6 +4,7 @@ const path = require('path');
 // Default config
 const config = {
     js_directory: path.resolve('./resources/assets/js'),
+    js_entry: 'app.js',
 };
 
 // Override with the custom config if exists
