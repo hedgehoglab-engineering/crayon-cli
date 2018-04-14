@@ -7,7 +7,7 @@ describe('crayon', () => {
         return exec('crayon').then((content) => {
             console.log(content);
             return expect(content).toMatch(new RegExp(`crayon ${version}`));
-        });
+        }).catch(console.log);
     });
 
 });
