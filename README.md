@@ -15,11 +15,14 @@ npm i -g netsells/crayon-cli
 
    USAGE
 
-     crayon make:repository <name>
+     crayon <command> [options]
 
-   ARGUMENTS
+   COMMANDS
 
-     <name>      Repository name      required      
+     add:eslint [config]         Add eslint to the project.         
+     add:stylelint               Add stylelint to the project       
+     make:repository <name>      Make a repository                  
+     help <command>              Display help for a specific command
 
    GLOBAL OPTIONS
 

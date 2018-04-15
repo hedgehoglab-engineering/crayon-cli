@@ -3,6 +3,8 @@
     "globals": {
         "describe": true,
         "afterAll": true,
+        "beforeAll": true,
+        "jest": true,
         "expect": true,
         "test": true
     }

@@ -13,13 +13,15 @@
     "caporal": "^0.10.0",
     "fs-extra": "^5.0.0",
     "glob": "^7.1.2",
-    "inquirer": "^5.1.0"
+    "inquirer": "^5.1.0",
+    "ora": "^2.0.0"
   },
   "devDependencies": {
-    "eslint": "^4.10.0",
-    "eslint-config-netsells": "github:netsells/eslint-config-netsells",
+    "eslint": "^4.19.1",
+    "eslint-config-netsells": "netsells/eslint-config-netsells",
     "husky": "^0.15.0-rc.8",
     "jest": "^22.4.2",
+    "rimraf": "^2.6.2",
     "slug": "^0.9.1"
   },
   "bin": {
