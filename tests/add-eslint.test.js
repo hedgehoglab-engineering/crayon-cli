@@ -8,7 +8,7 @@ describe('add:eslint', () => {
     beforeAll(() => {
         jest.setTimeout(20000);
 
-        return exec('yarn init -y', './test').then((content) => {
+        return exec('yarn init -y', './test').then(() => {
             return exec('crayon add:eslint', './test');
         });
     });
