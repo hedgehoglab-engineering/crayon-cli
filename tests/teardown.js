@@ -1,7 +1,12 @@
 const fs = require('fs-extra');
 const rmdir = require('rimraf');
 
-const teardown = async () => {
+/**
+ * Teardown function to run after all tests complete
+ * 
+ * @returns {Promise<any>}
+ */
+const teardown = async() => {
     return await new Promise((resolve) => {
         [
             './test/.eslintrc',
