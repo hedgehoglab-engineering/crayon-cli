@@ -7,14 +7,14 @@ const fs = require('fs-extra');
 const { isWebpack } = require('../../utils');
 
 crayon
-    .command('add:eslint', 'Add eslint to the project.')
-    .argument('[config]', 'Optional eslint config package.', /(.)/, 'netsells/eslint-config-netsells')
+    .command('add:eslint', 'Add eslint to the project')
+    .argument('[config]', 'Optional eslint config package', /(.)/, 'netsells/eslint-config-netsells')
     .action((args, options, logger) => {
         const spinner = ora('Adding dependencies...').start();
 
         const config = args.config.match(/eslint-config-(.*)/)[1];
 
-        let dependencies = [
+        const dependencies = [
             'eslint',
             args.config,
         ];
@@ -30,7 +30,7 @@ crayon
             spinner.succeed('Dependencies added.');
 
             if (isWebpack) {
-                console.log(chalk.yellow('To add the following to your webpack config:'), `
+                console.log(chalk.yellow('Add the following to your webpack config:'), `
 {
     module: {
         rules: [

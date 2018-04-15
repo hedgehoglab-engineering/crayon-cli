@@ -1,16 +1,16 @@
 const exec = require('../utils/execute');
 /** @type {Object} **/
 const fs = require('fs-extra');
-const eslintrcFile = './test/.eslintrc';
+const stylelintrcFile = './test/.stylelintrc';
 
-describe('add:eslint', () => {
+describe('add:stylelint', () => {
 
     beforeAll(() => {
         jest.setTimeout(20000);
 
         return Promise.all([
             exec('yarn init -y', './test'),
-            exec('crayon add:eslint', './test'),
+            exec('crayon add:stylelint', './test'),
         ]);
     });
 
@@ -18,14 +18,14 @@ describe('add:eslint', () => {
         const packageContents = require('../test/package.json');
         const devDependencies = Object.keys(packageContents.devDependencies);
 
-        expect(devDependencies).toContain('eslint-config-netsells');
-        expect(devDependencies).toContain('eslint');
+        expect(devDependencies).toContain('stylelint-config-netsells');
+        expect(devDependencies).toContain('stylelint');
     });
 
-    test('generates a .eslintrc', () => {
-        const eslintrcExists = fs.existsSync(eslintrcFile);
+    test('generates a .stylelintrc', () => {
+        const stylelintrcExists = fs.existsSync(stylelintrcFile);
 
-        expect(eslintrcExists).toBe(true);
+        expect(stylelintrcExists).toBe(true);
     });
 
 });

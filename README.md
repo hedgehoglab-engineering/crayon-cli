@@ -19,8 +19,8 @@ npm i -g netsells/crayon-cli
 
    COMMANDS
 
-     add:eslint [config]         Add eslint to the project.         
-     add:eslint [config]         Add stylelint to the project.      
+     add:eslint [config]         Add eslint to the project          
+     add:stylelint [config]      Add stylelint to the project       
      make:repository <name>      Make a repository                  
      help <command>              Display help for a specific command
 
