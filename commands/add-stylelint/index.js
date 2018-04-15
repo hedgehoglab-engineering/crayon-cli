@@ -24,7 +24,7 @@ crayon
         }
 
         // Add the dependencies
-        exec(`yarn add ${dependencies.join(' ')} -D`).then(() => {
+        return exec(`yarn add ${dependencies.join(' ')} -D`).then(() => {
             // Create the .stylelintrc file
             fs.outputFileSync('./.stylelintrc', JSON.stringify({ extends: `stylelint-config-${config}` }, null, 4));
             spinner.succeed('Dependencies added.');

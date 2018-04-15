@@ -24,7 +24,7 @@ crayon
         }
 
         // Add the dependencies
-        exec(`yarn add ${dependencies.join(' ')} -D`).then(() => {
+        return exec(`yarn add ${dependencies.join(' ')} -D`).then(() => {
             // Create the .eslintrc file
             fs.outputFileSync('./.eslintrc', JSON.stringify({ extends: config }, null, 4));
             spinner.succeed('Dependencies added.');
