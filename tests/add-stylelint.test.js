@@ -6,7 +6,7 @@ const stylelintrcFile = './test/.stylelintrc';
 describe('add:stylelint', () => {
 
     beforeAll(() => {
-        jest.setTimeout(20000);
+        jest.setTimeout(30000);
 
         return exec('yarn init -y', './test').then(() => {
             return exec('crayon add:stylelint', './test');
