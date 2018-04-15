@@ -1,3 +1,5 @@
+const fs = require('fs-extra');
+
 /**
  * Convert a string to upper camelcase
  *
@@ -11,3 +13,5 @@ module.exports.toCamelCase = (string) => {
         return capture.toUpperCase();
     }).replace(/\s+/g, '');
 };
+
+module.exports.isWebpack = fs.existsSync('./webpack.mix.js') || fs.existsSync('./webpack.config.js');

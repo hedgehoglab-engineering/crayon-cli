@@ -1,4 +1,5 @@
 const crayon = require('caporal');
+/** @type {Object} **/
 const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
