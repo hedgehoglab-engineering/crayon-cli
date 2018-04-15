@@ -1,4 +1,5 @@
 const { exec } = require('child_process');
+const fs = require('fs');
 
 /**
  * Execute a command on the shell
@@ -9,6 +10,9 @@ const { exec } = require('child_process');
  * @return {Promise}
  */
 const execute = (command, directory = './') => {
+    if (!fs.existsSync(directory)) {
+        fs.mkdirSync(directory);
+    }
     return new Promise((resolve, reject) => {
         exec(command, {
             cwd: directory,

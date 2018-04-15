@@ -8,10 +8,9 @@ describe('add:stylelint', () => {
     beforeAll(() => {
         jest.setTimeout(20000);
 
-        return Promise.all([
-            exec('yarn init -y', './test'),
-            exec('crayon add:stylelint', './test'),
-        ]);
+        return exec('yarn init -y', './test').then(() => {
+            return exec('crayon add:stylelint', './test');
+        });
     });
 
     test('adds correct dependencies', () => {
