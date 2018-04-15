@@ -3,7 +3,7 @@ const rmdir = require('rimraf');
 
 /**
  * Teardown function to run after all tests complete
- * 
+ *
  * @returns {Promise<any>}
  */
 const teardown = async() => {
