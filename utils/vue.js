@@ -1,7 +1,7 @@
 const { existsSync, readFileSync, writeFileSync } = require('fs-extra');
 const path = require('path');
-const { js_directory, js_entry } = require('../utils/config');
-const appEntry = path.resolve(js_directory, js_entry);
+const { config } = require('../utils/config');
+const appEntry = path.resolve(config.js_directory, config.js_entry);
 
 /**
  * Add a property to the vue instance

@@ -1,8 +1,8 @@
 const fs = require('fs-extra');
 const path = require('path');
 const { addToInstance } = require('../utils/vue');
-const { js_directory, js_entry } = require('../utils/config');
-const entryFile = path.resolve(js_directory, js_entry);
+const { config } = require('../utils/config');
+const entryFile = path.resolve(config.js_directory, config.js_entry);
 
 describe('vue helpers', () => {
 

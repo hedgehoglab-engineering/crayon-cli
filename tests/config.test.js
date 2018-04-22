@@ -1,11 +1,21 @@
-const jsDir = './test/resources/assets/js';
+const { write, reset } = require('../utils/config');
 
 describe('config', () => {
 
-    test('user can override with a custom .crayonrc', () => {
-        const { js_directory } = require('../utils/config');
+    beforeAll(() => {
+        write({
+            js_directory: './repositories',
+        }, '../test/.crayonrc');
+    });
 
-        expect(js_directory).toBe(jsDir);
+    afterAll(() => {
+        reset('../test/.crayonrc');
+    });
+
+    test('user can override with a custom .crayonrc', () => {
+        const { config } = require('../utils/config');
+
+        expect(config.js_directory).toBe('./repositories');
     });
 
 });
