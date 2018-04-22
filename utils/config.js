@@ -4,6 +4,7 @@ const { existsSync, readFileSync, outputFileSync } = require('fs-extra');
 const config = {
     js_directory: './resources/assets/js',
     env: 'production',
+    js_entry: 'app.js',
 };
 
 // Override with the custom config if exists

@@ -3,7 +3,11 @@
     "globals": {
         "describe": true,
         "afterAll": true,
+        "beforeAll": true,
         "expect": true,
         "test": true
+    },
+    "rules": {
+        "no-console": 0
     }
 }
