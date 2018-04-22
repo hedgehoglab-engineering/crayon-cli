@@ -1,5 +1,4 @@
 const { write, reset } = require('../utils/config');
-const { config } = require('../utils/config');
 
 describe('config', () => {
 

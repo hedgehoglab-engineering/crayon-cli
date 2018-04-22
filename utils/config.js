@@ -18,7 +18,7 @@ if (existsSync(`${process.cwd()}/.crayonrc`)) {
 /**
  * Reset the .crayonrc to the default
  *
- * @param path
+ * @param {String} path
  */
 const reset = (path) => {
     write(config, path);
@@ -27,8 +27,8 @@ const reset = (path) => {
 /**
  * Set a single config value programmatically
  *
- * @param key
- * @param value
+ * @param {String} key
+ * @param {*} value
  */
 const setValue = (key, value) => {
     config[key] = value;
@@ -37,7 +37,7 @@ const setValue = (key, value) => {
 /**
  * Fetch the whole config or a single value if a key is provided
  *
- * @param key
+ * @param {String} key
  *
  * @returns {Object|*}
  */
@@ -48,10 +48,8 @@ const get = (key = undefined) => {
 /**
  * Fetch the whole config or a single value if a key is provided
  *
- * @param data
- * @param path
- *
- * @returns {Object|*}
+ * @param {Object} data
+ * @param {String} path
  */
 const write = (data, path) => {
     const newConfig = Object.assign(config, data);
