@@ -21,6 +21,11 @@ npm i -g netsells/crayon-cli
 
      <name>      Repository name      required      
 
+   OPTIONS
+
+     --with-base          Whether the BaseRepository should be recreated.                 optional      
+     --overwrite, -o      Whether the repository should be overwritten if it exists.      optional      
+
    GLOBAL OPTIONS
 
      -h, --help         Display help                                      

@@ -9,7 +9,9 @@ const { exec } = require('child_process');
  */
 const execute = (command) => {
     return new Promise((resolve, reject) => {
-        exec(command, (error, stdout, stderr) => { 
+        exec(command, {
+            cwd: './test',
+        }, (error, stdout, stderr) => {
             if (error) {
                 return reject({ error, stderr });
             }

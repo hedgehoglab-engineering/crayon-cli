@@ -13,7 +13,8 @@
     "caporal": "^0.10.0",
     "fs-extra": "^5.0.0",
     "glob": "^7.1.2",
-    "inquirer": "^5.1.0"
+    "inquirer": "^5.1.0",
+    "lodash": "^4.17.5"
   },
   "devDependencies": {
     "eslint": "^4.10.0",
