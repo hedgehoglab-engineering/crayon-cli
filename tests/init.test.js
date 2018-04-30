@@ -1,40 +1,23 @@
 const fs = require('fs-extra');
 const exec = require('../utils/execute');
-const rcPath = `${process.cwd()}/.crayonrc`;
-const rcPathTemp = `${process.cwd()}/.crayonrc-temp`;
+const testPath = './test/.crayonrc';
 
-describe('make:repository', () => {
-
-    beforeAll(() => {
-        const rcExists = fs.existsSync(rcPath);
-
-        if (rcExists){
-            fs.moveSync(rcPath, rcPathTemp);
-        }
-    });
+describe('init', () => {
 
     afterAll(() => {
-        const rcExists = fs.existsSync(rcPath);
-        const rcTempExists = fs.existsSync(rcPathTemp);
-
-        if(rcExists){
-
-            fs.unlink(rcPath);
-
-        }
-
-        if (rcTempExists){
-            fs.moveSync(rcPathTemp, rcPath, { overwrite: true });
+        if (fs.existsSync(testPath)){
+            fs.unlink(testPath);
         }
     });
 
-    test('crayon initialize', () => {
+    test('Create a Crayon config file', () => {
         expect.assertions(1);
 
-        return exec('crayon init').then(() => {
-            const fileExists = fs.existsSync(rcPath);
+        return exec('crayon init').then((output) => {
 
-            expect(fileExists).toBe(true);
+            console.log(output);
+
+            expect( fs.existsSync(testPath) ).toBe(true);
         })
     })
 
