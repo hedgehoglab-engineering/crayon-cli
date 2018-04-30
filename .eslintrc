@@ -6,5 +6,8 @@
         "afterAll": true,
         "expect": true,
         "test": true
+    },
+    "rules": {
+        "no-console": 0
     }
 }

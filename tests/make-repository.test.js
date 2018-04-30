@@ -1,22 +1,42 @@
-const { generateOutputPath, generateRepositoryName } = require('../commands/make-repository/utils');
+/** @type {Object} **/
 const fs = require('fs-extra');
+/** @type {Promise} **/
 const exec = require('../utils/execute');
+const { testPath } = require('../utils');
 const repositoryName = 'user';
-const outputPath = generateOutputPath(repositoryName);
+const laroutePath = testPath('public/js/laroute.js');
+const command = `crayon make:repository ${repositoryName}`;
 
 describe('make:repository', () => {
 
-    afterAll(() => {
-        fs.unlink(outputPath);
+    beforeAll(() => {
+        fs.outputFileSync(laroutePath, '');
     });
 
-    test('generates boilerplate', () => {
+    afterAll(() => {
+        [laroutePath]
+            .filter(fs.existsSync)
+            .forEach((file) => fs.unlink(file));
+    });
+
+    test('generates repository boilerplate', () => {
         expect.assertions(2);
 
-        return exec(`crayon make:repository ${repositoryName}`).then((output) => {
-            const fileExists = fs.existsSync(outputPath);
+        return exec(`${command} -o`).then((output) => {
+            const fileExists = fs.existsSync('./test/resources/assets/js/repositories/UserRepository.js');
 
-            expect(output).toMatch(new RegExp(`${generateRepositoryName(repositoryName)} created successfully.`));
+            expect(output).toMatch(new RegExp('UserRepository created successfully.'));
+            expect(fileExists).toBe(true);
+        });
+    });
+
+    test('generates BaseRepository', () => {
+        expect.assertions(2);
+
+        return exec(`${command} --with-base -o`).then((output) => {
+            const fileExists = fs.existsSync('./test/resources/assets/js/repositories/BaseRepository.js');
+
+            expect(output).toMatch(new RegExp(`BaseRepository and UserRepository created successfully.`));
             expect(fileExists).toBe(true);
         });
     });

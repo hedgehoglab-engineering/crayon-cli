@@ -6,14 +6,14 @@
   "scripts": {
     "lint": "eslint ./**/*.js --fix",
     "generate": "node ./dev/generate-readme",
-    "make:command": "node ./dev/make-command",
     "test": "jest tests/"
   },
   "dependencies": {
     "caporal": "^0.10.0",
     "fs-extra": "^5.0.0",
     "glob": "^7.1.2",
-    "inquirer": "^5.1.0"
+    "inquirer": "^5.1.0",
+    "lodash": "^4.17.5"
   },
   "devDependencies": {
     "eslint": "^4.10.0",
@@ -27,7 +27,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run test && npm run lint && npm run generate && git add README.md"
+      "pre-commit": "npm run lint && npm run generate && git add README.md"
     }
   }
 }
