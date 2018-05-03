@@ -33,7 +33,7 @@ crayon.command('add:vuex', 'Adds Vuex to your project')
         }
 
         // Install Vuex
-        exec('yarn add vuex').catch((err) => {
+        exec('yarn add vuex', false).catch((err) => {
             logger.error(chalk.red(`ERROR: ${JSON.stringify(err)}`));
         });
 
