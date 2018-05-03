@@ -24,6 +24,10 @@ crayon.command('add:vuex', 'Adds Vuex to your project')
         const appJs = fs.readFileSync(appEntry, 'utf8');
         const appJsArray = appJs.split('\n');
 
+        if ((appJsArray.indexOf(`import store from './store';`) > -1) && (appJsArray.indexOf(`    store,`) > -1)){
+            return logger.info(chalk.blue('Vuex already installed.'));
+        }
+
         // Insert store import
         appJsArray.splice(0, 0, `import store from './store';\n`);
 
