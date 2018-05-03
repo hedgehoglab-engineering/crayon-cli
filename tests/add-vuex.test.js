@@ -30,4 +30,19 @@ describe('add:vuex', () => {
         });
     });
 
+    test('adds vuex to entry file', () => {
+        expect.assertions(2);
+
+        return exec('crayon add:vuex').then((output) => {
+            const entryFileContents = fs.readFileSync(entryFile, 'utf-8');
+            const entryFileContentsArray = entryFileContents.split('\n');
+
+            console.log(entryFileContentsArray)
+
+            expect(entryFileContentsArray.indexOf(`import store from './store';`)).toBeGreaterThan(-1);
+            expect(entryFileContentsArray.indexOf(`    store,`)).toBeGreaterThan(entryFileContentsArray.indexOf(`new Vue({`));
+
+        });
+    });
+
 });

@@ -19,9 +19,10 @@ npm i -g netsells/crayon-cli
 
    COMMANDS
 
-     add:vuex                    Adds Vuex to your project          
-     make:repository <name>      Make a repository                  
-     help <command>              Display help for a specific command
+     add:vuex                    Adds Vuex to your project                    
+     make:command <command>      Generate boilerplate for a new crayon command
+     make:repository <name>      Make a repository                            
+     help <command>              Display help for a specific command          
 
    GLOBAL OPTIONS
 

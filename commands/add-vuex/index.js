@@ -25,7 +25,7 @@ crayon.command('add:vuex', 'Adds Vuex to your project')
         const appJsArray = appJs.split('\n');
 
         // Insert store import
-        appJsArray.splice(0, 0, 'import store from \'./store\';\n');
+        appJsArray.splice(0, 0, `import store from './store';\n`);
 
         // Insert store into vue initialise
         if (!appJsArray.includes('new Vue({')) {
