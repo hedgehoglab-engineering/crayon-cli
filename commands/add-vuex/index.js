@@ -9,8 +9,8 @@ const storeStub = fs.readFileSync(path.resolve(`${__dirname}/stubs/index.js`), '
 const configJsDir = config.get('js_directory');
 const configJsEntry = config.get('js_entry');
 
-const jsDir = `${process.cwd()}/${ configJsDir !== undefined ? configJsDir : 'resources/assets/js' }`;
-const appEntry = `${jsDir}/${ configJsEntry !== undefined ? configJsEntry : 'app.js' }`;
+const jsDir = path.resolve(process.cwd(), configJsDir !== undefined ? configJsDir : 'resources/assets/js');
+const appEntry = path.resolve(jsDir, configJsEntry !== undefined ? configJsEntry : 'app.js');
 const storeLocation = `${jsDir}/store`;
 
 crayon.command('add:vuex', 'Adds Vuex to your project')
