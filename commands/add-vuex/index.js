@@ -3,13 +3,19 @@ const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
 const exec = require('../../utils/execute.js');
-const jsDir = `${process.cwd()}/resources/assets/js`;
-const appEntry = `${jsDir}/app.js`;
-const storeLocation = `${jsDir}/store`;
+const config = require('../../utils/config');
 const storeStub = fs.readFileSync(path.resolve(`${__dirname}/stubs/index.js`), 'utf8');
+
+const configJsDir = config.get('js_directory');
+const configJsEntry = config.get('js_entry');
+
+const jsDir = `${process.cwd()}/${ configJsDir !== undefined ? configJsDir : 'resources/assets/js' }`;
+const appEntry = `${jsDir}/${ configJsEntry !== undefined ? configJsEntry : 'app.js' }`;
+const storeLocation = `${jsDir}/store`;
 
 crayon.command('add:vuex', 'Adds Vuex to your project')
     .action((args, options, logger) => {
+        
         // Read app.js
         if (!fs.existsSync(appEntry)) {
             return logger.error(chalk.red('App entry point not found.'));
@@ -27,8 +33,8 @@ crayon.command('add:vuex', 'Adds Vuex to your project')
         }
 
         // Install Vuex
-        exec('yarn add vuex').catch(({ stderr }) => {
-            logger.error(chalk.red(`ERROR: ${stderr}`));
+        exec('yarn add vuex').catch((err) => {
+            logger.error(chalk.red(`ERROR: ${JSON.stringify(err)}`));
         });
 
         // Create store
