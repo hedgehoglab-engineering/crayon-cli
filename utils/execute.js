@@ -4,6 +4,8 @@ const { exec } = require('child_process');
  * Execute a command on the shell
  * 
  * @param  {String} command
+ *
+ * @param  {Boolean} test
  * 
  * @return {Promise}
  */
