@@ -1,11 +1,11 @@
 const { toCamelCase } = require('../../utils');
-const { js_directory } = require('../../utils/config');
-const OUTPUT_DIRECTORY = `${js_directory}/repositories`;
+const { config } = require('../../utils/config');
+const OUTPUT_DIRECTORY = `${config.js_directory}/repositories`;
 
 /**
  * Generate the name of the repository
  *
- * @param name
+ * @param {String} name
  *
  * @returns {string}
  */
@@ -16,7 +16,7 @@ function generateRepositoryName(name) {
 /**
  * Generate the fully formed output path of the repository file
  *
- * @param name
+ * @param {String} name
  *
  * @returns {string}
  */

@@ -1,6 +1,7 @@
-const fs = require('fs');
+const { readFileSync, writeFileSync } = require('fs-extra');
 const execute = require('../../utils/execute');
-const templateFile = fs.readFileSync(`${__dirname}/README.md`, 'utf8');
+/** @type {String} */
+const templateFile = readFileSync(`${__dirname}/README.md`, 'utf8');
 const outputFile = `${__dirname}/../../README.md`;
 
 // Run the command and get the output
@@ -9,5 +10,5 @@ execute('crayon --no-color').then((commandOutput) => {
     const output = templateFile.replace('{{CRAYON_OUTPUT}}', commandOutput);
 
     // Write the file
-    fs.writeFileSync(outputFile, output);
+    writeFileSync(outputFile, output);
 });
