@@ -15,13 +15,16 @@ npm i -g netsells/crayon-cli
 
    USAGE
 
-     crayon <command> [options]
+     crayon make:repository <name>
 
-   COMMANDS
+   ARGUMENTS
 
-     make:command <command>      Generate boilerplate for a new crayon command
-     make:repository <name>      Make a repository                            
-     help <command>              Display help for a specific command          
+     <name>      Repository name      required      
+
+   OPTIONS
+
+     --with-base          Whether the BaseRepository should be recreated.                 optional      
+     --overwrite, -o      Whether the repository should be overwritten if it exists.      optional      
 
    GLOBAL OPTIONS
 

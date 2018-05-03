@@ -62,4 +62,5 @@ module.exports = {
     setValue,
     get,
     write,
+    reset,
 };
