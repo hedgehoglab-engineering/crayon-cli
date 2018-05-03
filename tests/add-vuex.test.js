@@ -25,10 +25,12 @@ describe('add:vuex', () => {
     test('creates files in correct places', () => {
         expect.assertions(1);
 
-        return exec('crayon add:vuex').then((output) => {
+        return exec('crayon add:vuex').then( output => {
             expect(fs.existsSync(path.join(jsDir, 'store/index.js'))).toBe(true);
+        }).catch( err => {
+            console.log(err);
         });
-    });
+    }, 20000);
 
     test('adds vuex to entry file', () => {
         expect.assertions(2);
@@ -36,7 +38,7 @@ describe('add:vuex', () => {
         return exec('crayon add:vuex').then((output) => {
             const entryFileContents = fs.readFileSync(entryFile, 'utf-8');
             const entryFileContentsArray = entryFileContents.split('\n');
-            
+
             expect(entryFileContentsArray.indexOf(`import store from './store';`)).toBeGreaterThan(-1);
             expect(entryFileContentsArray.indexOf(`    store,`)).toBeGreaterThan(entryFileContentsArray.indexOf(`new Vue({`));
 
