@@ -4,6 +4,7 @@
         "describe": true,
         "afterAll": true,
         "beforeAll": true,
+        "beforeEach": true,
         "expect": true,
         "test": true
     },
