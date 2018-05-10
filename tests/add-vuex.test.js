@@ -25,7 +25,7 @@ describe('add:vuex', () => {
     test('creates files in correct places', () => {
         expect.assertions(1);
 
-        return exec('crayon add:vuex').then( output => {
+        return exec('crayon add:vuex').then(() => {
             expect(fs.existsSync(path.join(jsDir, 'store/index.js'))).toBe(true);
         });
     }, 20000);

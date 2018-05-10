@@ -55,3 +55,39 @@ crayon.command('add:vuex', 'Adds Vuex to your project')
 
         logger.info(chalk.green('Vuex installed successfully.'));
     });
+
+crayon.command('remove:vuex', 'Removes Vuex from your project')
+    .action((args, options, logger) => {
+        // Read app.js
+        if (!fs.existsSync(appEntry)) {
+            return logger.error(chalk.red('App entry point not found.'));
+        }
+
+        const appJs = fs.readFileSync(appEntry, 'utf8');
+        const appJsArray = appJs.split('\n');
+
+        if ((appJsArray.indexOf(`import store from './store';`) == -1) && (appJsArray.indexOf(`    store,`) == -1)){
+            return logger.info(chalk.blue('Vuex not installed.'));
+        }
+
+        // Remove store import
+        const importIndex = appJsArray.indexOf(`import store from './store';`);
+        appJsArray.splice(importIndex, 1);
+
+        // Remove store from vue initialise
+        const storeIndex = appJsArray.indexOf(`    store,`);
+        appJsArray.splice(storeIndex, 1);
+
+        // Uninstall Vuex
+        exec('npm uninstall vuex', false).catch((err) => {
+            logger.error(chalk.red(`ERROR: ${JSON.stringify(err)}`));
+        });
+
+        // Create store
+        fs.removeSync(storeLocation);
+
+        // Write app.js with new lines
+        fs.writeFileSync(appEntry, appJsArray.join('\n'));
+
+        logger.info(chalk.green('Vuex removed successfully.'));
+    });
