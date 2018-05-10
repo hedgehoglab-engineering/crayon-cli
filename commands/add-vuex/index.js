@@ -29,7 +29,7 @@ crayon.command('add:vuex', 'Adds Vuex to your project')
         }
 
         // Insert store import
-        appJsArray.splice(0, 0, `import store from './store';\n`);
+        appJsArray.splice(0, 0, `import store from './store';`);
 
         // Insert store into vue initialise
         if (!appJsArray.includes('new Vue({')) {
