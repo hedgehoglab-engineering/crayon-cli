@@ -19,9 +19,10 @@ npm i -g netsells/crayon-cli
 
    COMMANDS
 
-     init                        Creates a Crayon config file       
-     make:repository <name>      Make a repository                  
-     help <command>              Display help for a specific command
+     init                        Creates a Crayon config file                 
+     make:command <command>      Generate boilerplate for a new crayon command
+     make:repository <name>      Make a repository                            
+     help <command>              Display help for a specific command          
 
    GLOBAL OPTIONS
 
