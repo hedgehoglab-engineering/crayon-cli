@@ -9,6 +9,10 @@ const jsDir = path.resolve('test', configJsDir !== undefined ? configJsDir : 're
 
 describe('remove:vuex', () => {
 
+    beforeAll(() => {
+        jest.setTimeout(30000);
+    });
+
     beforeEach(() => {
         if (!fs.existsSync(entryFile)){
             const appJsStub = fs.readFileSync(path.join(`${__dirname}/stubs/add-vuex/app.js`), 'utf8');
@@ -17,7 +21,7 @@ describe('remove:vuex', () => {
         }
 
         return exec('crayon add:vuex');
-    }, 20000);
+    });
 
     test('removes vuex from entry file', () => {
         expect.assertions(2);
@@ -32,7 +36,7 @@ describe('remove:vuex', () => {
             console.log(err);
         });
 
-    }, 20000);
+    });
 
     test('removes store', () => {
         expect.assertions(1);
@@ -43,6 +47,6 @@ describe('remove:vuex', () => {
             console.log(err);
         });
 
-    }, 20000);
+    });
 
 });

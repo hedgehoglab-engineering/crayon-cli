@@ -10,6 +10,8 @@ const jsDir = path.resolve('test', configJsDir !== undefined ? configJsDir : 're
 describe('add:vuex', () => {
 
     beforeAll(() => {
+        jest.setTimeout(30000);
+        
         if (!fs.existsSync(entryFile)){
             const appJsStub = fs.readFileSync(path.join(`${__dirname}/stubs/add-vuex/app.js`), 'utf8');
 
@@ -28,7 +30,7 @@ describe('add:vuex', () => {
         return exec('crayon add:vuex').then(() => {
             expect(fs.existsSync(path.join(jsDir, 'store/index.js'))).toBe(true);
         });
-    }, 20000);
+    });
 
     test('adds vuex to entry file', () => {
         expect.assertions(2);

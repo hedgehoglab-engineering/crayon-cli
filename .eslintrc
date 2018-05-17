@@ -6,7 +6,8 @@
         "beforeAll": true,
         "beforeEach": true,
         "expect": true,
-        "test": true
+        "test": true,
+        "jest": true,
     },
     "rules": {
         "no-console": 0
