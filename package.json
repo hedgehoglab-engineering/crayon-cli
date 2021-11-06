@@ -1,33 +1,36 @@
 {
-  "name": "crayon",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "scripts": {
-    "lint": "eslint ./**/*.js --fix",
-    "generate": "node ./dev/generate-readme",
-    "test": "jest tests/"
-  },
-  "dependencies": {
-    "caporal": "^0.10.0",
-    "fs-extra": "^5.0.0",
-    "glob": "^7.1.2",
-    "inquirer": "^5.1.0",
-    "lodash": "^4.17.5"
-  },
-  "devDependencies": {
-    "eslint": "^4.10.0",
-    "eslint-config-netsells": "github:netsells/eslint-config-netsells",
-    "husky": "^0.15.0-rc.8",
-    "jest": "^22.4.2",
-    "slug": "^0.9.1"
-  },
-  "bin": {
-    "crayon": "./index.js"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint && npm run generate && git add README.md"
+    "name": "crayon",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "lint": "eslint ./**/*.js --fix",
+        "generate": "node ./build/generate-readme"
+    },
+    "dependencies": {
+        "@caporal/core": "^2.0.2",
+        "caporal": "^1.4.0",
+        "fs-extra": "^5.0.0",
+        "glob": "^7.1.2",
+        "inquirer": "^8.2.0",
+        "lodash.camelcase": "^4.3.0",
+        "lodash.kebabcase": "^4.1.1",
+        "lodash.template": "^4.5.0"
+    },
+    "devDependencies": {
+        "@netsells/eslint-config": "^5.1.0",
+        "eslint": "^7",
+        "eslint-plugin-jquery": "^1.5.1",
+        "eslint-plugin-require-jsdoc-except": "^1.5.0",
+        "husky": "^0.15.0-rc.8",
+        "slug": "^0.9.1"
+    },
+    "bin": {
+        "crayon": "./index.js"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run lint && npm run generate && git add README.md"
+        }
     }
-  }
 }

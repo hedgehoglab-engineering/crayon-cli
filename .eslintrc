@@ -1,13 +1,13 @@
 {
-    "extends": "netsells",
-    "globals": {
-        "describe": true,
-        "afterAll": true,
-        "beforeAll": true,
-        "expect": true,
-        "test": true
+    "root": true,
+    "env": {
+        "browser": true,
+        "node": true
     },
-    "rules": {
-        "no-console": 0
-    }
+    "globals": {
+        "use": true
+    },
+    "extends": [
+        "@netsells"
+    ]
 }

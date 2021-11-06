@@ -24,15 +24,3 @@ cd crayon-cli
 # link the module for use elsewhere
 npm link
 ```
-
-### Creating commands
-
-Commands can be generated with some basic boiletplate using the following command:
-
-```bash
-npm run make:command
-```
-
-The command will run through a few questions to generate some boilerplate to get you going.
-
-The CLI is powered by [Caporal](https://github.com/mattallty/Caporal.js) so visit the docs for details on how to put together new commands.

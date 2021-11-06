@@ -11,28 +11,27 @@ npm i -g netsells/crayon-cli
 ## Commands
 
 ```bash
-   crayon 1.0.0 
+  crayon 
 
-   USAGE
+  USAGE 
+  
+    ▸ crayon <command> [ARGUMENTS...] [OPTIONS...]
 
-     crayon make:repository <name>
 
-   ARGUMENTS
+  COMMANDS — Type 'crayon help <command>' to get some help about a command
 
-     <name>      Repository name      required      
+    make:component                       Generate boilerplate for a new component               
 
-   OPTIONS
+  GLOBAL OPTIONS
 
-     --with-base          Whether the BaseRepository should be recreated.                 optional      
-     --overwrite, -o      Whether the repository should be overwritten if it exists.      optional      
-
-   GLOBAL OPTIONS
-
-     -h, --help         Display help                                      
-     -V, --version      Display version                                   
-     --no-color         Disable colors                                    
-     --quiet            Quiet mode - only displays warn and error messages
-     -v, --verbose      Verbose mode - will also output debug messages    
+    -h, --help                           Display global help or command-related help.           
+    -V, --version                        Display version.                                       
+    --no-color                           Disable use of colors in output.                       
+    -v, --verbose                        Verbose mode: will also output debug messages.         
+    --quiet                              Quiet mode - only displays warn and error messages.    
+    --silent                             Silent mode: does not output anything, giving no       
+                                         indication of success or failure other than the exit   
+                                         code.                                                  
 
 ```
 
@@ -48,15 +47,3 @@ cd crayon-cli
 # link the module for use elsewhere
 npm link
 ```
-
-### Creating commands
-
-Commands can be generated with some basic boiletplate using the following command:
-
-```bash
-npm run make:command
-```
-
-The command will run through a few questions to generate some boilerplate to get you going.
-
-The CLI is powered by [Caporal](https://github.com/mattallty/Caporal.js) so visit the docs for details on how to put together new commands.

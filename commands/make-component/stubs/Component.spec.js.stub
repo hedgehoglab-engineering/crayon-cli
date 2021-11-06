@@ -1,0 +1,23 @@
+import * as <%- pascalName %> from './<%- pascalName %>.stories';
+import { generateSuite } from '@netsells/vue-storybook-test-utils';
+
+const suite = generateSuite(<%- pascalName %>);
+
+describe('<%- pascalName %>', () => {
+    let wrapper;
+
+    const <%- camelName %> = () => wrapper.getComponent();
+
+    beforeEach(() => {
+        wrapper = suite.<%- camelName %>();
+    });
+    <% if (!props.length) { %>
+    test.todo('something appropriate happens');
+    <% } else { %>
+    <% props.forEach(({ name }) => { %>
+    describe('when the <%- name %> prop is provided', () => {
+        test.todo('something appropriate happens');
+    });
+    <% }) %>
+    <% } %>
+});
