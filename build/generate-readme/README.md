@@ -16,7 +16,7 @@ npx @netsells/crayon-cli
 
 ## Commands
 
-```bash{{CRAYON_OUTPUT}}```
+```txt{{CRAYON_OUTPUT}}```
 
 ## Contributing
 

@@ -16,7 +16,7 @@ npx @netsells/crayon-cli
 
 ## Commands
 
-```bash
+```txt
   crayon  — a frontend CLI tool for bootstrapping and scaffolding frontend applications. 
  
   .--.     ___ .-.      .---.   ___  ___    .--.    ___ .-.
