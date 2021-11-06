@@ -15,6 +15,7 @@
         "inquirer": "^8.2.0",
         "lodash.camelcase": "^4.3.0",
         "lodash.kebabcase": "^4.1.1",
+        "lodash.replace": "^4.1.4",
         "lodash.template": "^4.5.0"
     },
     "devDependencies": {
