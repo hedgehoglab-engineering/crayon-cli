@@ -4,7 +4,11 @@ const glob = require('glob');
 const commands = glob.sync(`${ __dirname }/commands/*/index.js`);
 const logger = require('./logger');
 const fs = require('fs');
-const logo = fs.readFileSync('./utils/logo.txt', 'utf-8');
+const path = require('path');
+const logo = fs.readFileSync(
+    path.resolve(__dirname, './utils/logo.txt'),
+    'utf-8',
+);
 
 program.description(`a frontend CLI tool for bootstrapping and scaffolding frontend applications. \n ${ logo }`);
 program.logger(logger);
