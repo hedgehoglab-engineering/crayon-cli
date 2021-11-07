@@ -1,7 +1,7 @@
 {
     "name": "@netsells/crayon-cli",
     "version": "1.0.3",
-    "main": "index.js",
+    "main": "./src/index.js",
     "license": "MIT",
     "scripts": {
         "lint": "eslint ./**/*.js --fix",
@@ -26,7 +26,7 @@
         "husky": "^0.15.0-rc.8"
     },
     "bin": {
-        "crayon": "./index.js"
+        "crayon": "src/index.js"
     },
     "husky": {
         "hooks": {
