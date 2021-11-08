@@ -5,7 +5,7 @@ Crayon is a frontend CLI tool for bootstrapping and scaffolding frontend applica
 ## Installation
 
 ```bash
-yarn add @netsells/crayon-cli
+yarn add -D @netsells/crayon-cli
 ```
 
 Or without installation:
