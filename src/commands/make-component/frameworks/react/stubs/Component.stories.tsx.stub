@@ -1,0 +1,25 @@
+import type { Meta, StoryObj } from '@storybook/react'
+import { type ComponentProps } from 'react'
+
+import <%- component.name.pascal > from './<%- component.name.pascal >'
+
+type <%- component.name.pascal >PropsAndCustomArgs = ComponentProps<typeof <%- component.name.pascal >> & {}
+
+const meta: Meta<<%- component.name.pascal >PropsAndCustomArgs> = {
+  component: <%- component.name.pascal >,
+  render: args => {
+    return <<%- component.name.pascal > {...args} />
+  },
+  args: {
+    fullName: 'Christos Athanasiou',
+    profilePic: 'https://bit.ly/dan-abramov',
+    showProfile: false,
+    isActive: true,
+  },
+}
+
+export default meta
+
+type Story = StoryObj<<%- component.name.pascal >PropsAndCustomArgs>
+
+export const Default: Story = {}

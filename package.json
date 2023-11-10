@@ -1,36 +1,49 @@
 {
-    "name": "@netsells/crayon-cli",
-    "version": "1.0.4",
-    "main": "./src/index.js",
+    "name": "@hedgehoglab/crayon",
+    "version": "0.0.0",
     "license": "MIT",
+    "sideEffects": false,
+    "type": "module",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.cjs"
+        }
+    },
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
     "scripts": {
-        "lint": "eslint ./**/*.js --fix",
-        "generate": "node ./build/generate-readme"
+        "build": "unbuild",
+        "dev": "vitest dev",
+        "lint": "eslint --cache --ext .ts,.js,.mjs,.cjs . && prettier -c src test",
+        "lint:fix": "eslint --cache --ext .ts,.js,.mjs,.cjs . --fix && prettier -c src test -w",
+        "prepack": "pnpm run build",
+        "play": "jiti ./src/index.ts",
+        "release": "pnpm test && changelogen --release --push && npm publish",
+        "test": "pnpm lint && vitest run --coverage"
     },
     "dependencies": {
-        "@caporal/core": "^2.0.2",
-        "caporal": "^1.4.0",
-        "fs-extra": "^5.0.0",
-        "glob": "^7.1.2",
-        "inquirer": "^8.2.0",
-        "lodash.camelcase": "^4.3.0",
-        "lodash.kebabcase": "^4.1.1",
-        "lodash.replace": "^4.1.4",
+        "@clack/prompts": "^0.7.0",
+        "consola": "^3.2.3",
         "lodash.template": "^4.5.0"
     },
     "devDependencies": {
-        "@netsells/eslint-config": "^5.1.0",
-        "eslint": "^7",
-        "eslint-plugin-jquery": "^1.5.1",
-        "eslint-plugin-require-jsdoc-except": "^1.5.0",
-        "husky": "^0.15.0-rc.8"
+        "@hedgehoglab/eslint-config": "^0.1.8",
+        "@hedgehoglab/prettier-config": "^0.1.8",
+        "@types/lodash.template": "^4.5.3",
+        "@types/node": "^20.8.10",
+        "eslint": "^8.53.0",
+        "jiti": "^1.21.0",
+        "pathe": "^1.1.1",
+        "prettier": "^3.0.3",
+        "scule": "^1.0.0",
+        "typescript": "^5.2.2",
+        "unbuild": "^2.0.0"
     },
-    "bin": {
-        "crayon": "src/index.js"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "yarn lint && yarn generate && git add README.md"
-        }
-    }
+    "packageManager": "pnpm@8.10.2"
 }

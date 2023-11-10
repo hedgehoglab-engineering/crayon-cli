@@ -1,6 +1,8 @@
-const inquirer = require('inquirer');
-const { resolve } = require('path');
-const { existsSync, mkdirSync } = require('fs');
+import select from '@inquirer/select';
+import { checkbox, input } from '@inquirer/prompts';
+import confirm from '@inquirer/confirm';
+import { resolve } from 'path';
+import { existsSync, mkdirSync } from 'fs';
 
 class BaseCommand {
     constructor({ args, options, logger }) {
@@ -103,13 +105,9 @@ class BaseCommand {
      * @returns {Promise<string>}
      */
     async ask(message) {
-        const { answer } = await inquirer.prompt([{
+        return await input({
             message,
-            name: 'answer',
-            type: 'input',
-        }]);
-
-        return answer;
+        });
     }
 
     /**
@@ -121,14 +119,10 @@ class BaseCommand {
      * @returns {Promise<Array>}
      */
     async multiple(message, choices) {
-        const { answer } = await inquirer.prompt([{
+        return await checkbox({
             message,
-            name: 'answer',
-            type: 'checkbox',
             choices,
-        }]);
-
-        return answer;
+        });
     }
 
     /**
@@ -139,13 +133,24 @@ class BaseCommand {
      * @returns {Promise<boolean>}
      */
     async confirm(message) {
-        const { confirm } = await inquirer.prompt([{
+        return await confirm({
             message,
-            name: 'confirm',
-            type: 'confirm',
-        }]);
+        });
+    }
 
-        return confirm;
+    /**
+     * Select from a dropdown of options.
+     *
+     * @param {string} message
+     * @param {Array} choices
+     *
+     * @returns {Promise<boolean>}
+     */
+    async select(message, choices) {
+        return await select({
+            message,
+            choices,
+        });
     }
 
     /**
@@ -164,4 +169,4 @@ class BaseCommand {
     }
 }
 
-module.exports = BaseCommand;
+export default BaseCommand;

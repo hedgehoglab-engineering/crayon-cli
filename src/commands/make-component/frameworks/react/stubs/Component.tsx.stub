@@ -1,0 +1,20 @@
+import { Box, type BoxProps } from '@chakra-ui/react'
+
+interface <%- component.name.pascal %>Props extends BoxProps {<% component.props.forEach(({ name, type, required }) => { %>
+  <%- name %><%- required ? '?' : '' %>: <%= type %><% }) %>
+}
+
+export default function <%- component.name.pascal %>({<% component.props.forEach(({ name }) => { %>
+  <%- name %>,<% }) %>
+  className,
+  ...boxProps
+}: <%- component.name.pascal %>Props) {
+  return (
+    <Box
+      className={`${ component.name.kebab } <%- '${ className }' %>`}
+      {...boxProps}
+    >
+      <%- component.name.pascal %>
+    </Box>
+  )
+}

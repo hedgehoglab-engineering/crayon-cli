@@ -5,7 +5,7 @@
  *     string, arg: string}, Object: {component: string, arg: string}, String: {component: string, arg: string},
  *     Boolean: {component: string, arg: string}}}
  */
-const propTypes = {
+export const propTypes = {
     String: {
         component: '\'\'',
         arg: '\'\'',
@@ -32,4 +32,11 @@ const propTypes = {
     },
 };
 
-module.exports = propTypes;
+export const tsTypes = {
+    String: 'string',
+    Number: 'number',
+    Boolean: 'boolean',
+    Object: 'object',
+    Array: 'Array<any>',
+    Function: 'Function',
+};

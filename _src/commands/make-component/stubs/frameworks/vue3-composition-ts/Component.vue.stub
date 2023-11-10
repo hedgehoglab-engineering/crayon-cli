@@ -1,0 +1,19 @@
+<template>
+    <div class="<%- kebabName %>">
+        <%- pascalName %>
+    </div>
+</template>
+
+<script lang="ts" setup><% if (props.length) { %>
+    const props = withDefaults(defineProps<{<% props.forEach(({ name, tsTypes }) => { %>
+        <%- name %>: <%= tsTypes.join(' | ') %>
+    <% }) %>}>(), {<% props.forEach(({ name, propValue }) => { %>
+        <%- name %>: <%= propValue %>,
+    <% }) %>});<% } %>
+</script>
+
+<style lang="scss" scoped>
+    .<%- kebabName %> {
+
+    }
+</style>

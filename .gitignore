@@ -2,5 +2,5 @@
 /.idea/
 /package-lock.json
 /yarn.lock
-/test/*
-!.gitkeep
+.crayon
+.crayonrc

@@ -1,10 +1,17 @@
-const kebabCase = require('lodash.kebabcase');
-const camelCase = require('lodash.camelcase');
-const template = require('lodash.template');
-const { existsSync, readFileSync, writeFileSync } = require('fs');
-const { resolve } = require('path');
-const BaseCommand = require('../BaseCommand');
-const propTypes = require('./prop-types');
+import kebabCase from 'lodash.kebabcase';
+import camelCase from 'lodash.camelcase';
+import template from 'lodash.template';
+import { existsSync, readFileSync, writeFileSync } from 'fs';
+import { resolve } from 'path';
+import BaseCommand from '../BaseCommand.js';
+import { propTypes, tsTypes } from './prop-types.js';
+import config from '../../config.js';
+import { globSync } from 'glob';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 class MakeComponent extends BaseCommand {
     /**
@@ -44,6 +51,11 @@ class MakeComponent extends BaseCommand {
             this.props = [];
 
             this.componentName = this.path.split('/').slice(-1)[0];
+            this.framework = this.options.framework || config.framework;
+
+            if (!config.framework) {
+                await this.askFramework();
+            }
 
             if (existsSync(resolve(this.path, `${ this.componentName }.vue`))) {
                 this.error(`${ this.componentName } already exists at [${ this.path }].`);
@@ -176,7 +188,10 @@ class MakeComponent extends BaseCommand {
         while (!types.length) {
             types = await this.multiple(
                 'Select type(s)',
-                Object.keys(propTypes),
+                Object.keys(propTypes).map((name) => ({
+                    name,
+                    value: name,
+                })),
             );
 
             if (!types.length) {
@@ -206,10 +221,31 @@ class MakeComponent extends BaseCommand {
                 types,
                 propValue: component,
                 argValue: arg,
+                tsTypes: Object.entries(tsTypes)
+                    .filter(([key]) => types.find((type) => type === key))
+                    .map(([, type]) => type),
             });
 
             defineProps = await this.confirm('Would you like to define another?');
         }
+    }
+
+
+    /**
+     * Ask the user to input props.
+     *
+     * @returns {Promise<void>}
+     */
+    async askFramework() {
+        const frameworks = globSync(`${ __dirname }/stubs/frameworks/*`).map((directory) => directory.replace(`${ __dirname }/stubs/frameworks/`, ''));
+
+        this.framework = await this.select(
+            'Select framework:',
+            frameworks.map((name) => ({
+                name,
+                value: name,
+            })),
+        );
     }
 
     /**
@@ -227,6 +263,8 @@ class MakeComponent extends BaseCommand {
         return readFileSync(
             resolve(
                 directory,
+                'frameworks',
+                this.framework,
                 path,
             ),
             'utf8',
@@ -266,4 +304,4 @@ class MakeComponent extends BaseCommand {
     }
 }
 
-module.exports = MakeComponent;
+export default MakeComponent;
