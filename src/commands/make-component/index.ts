@@ -103,7 +103,7 @@ export default defineCommand({
         props,
       })
 
-      outro(`Component generated at ${componentName}/${componentName}.tsx`)
+      outro(`Component generated at ${path}/${componentName}.tsx`)
     })
   },
 })
