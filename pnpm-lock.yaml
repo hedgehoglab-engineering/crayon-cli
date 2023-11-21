@@ -8,6 +8,9 @@ dependencies:
   '@clack/prompts':
     specifier: ^0.7.0
     version: 0.7.0
+  citty:
+    specifier: ^0.1.5
+    version: 0.1.5
   consola:
     specifier: ^3.2.3
     version: 3.2.3
@@ -37,9 +40,6 @@ devDependencies:
   bumpp:
     specifier: ^9.2.0
     version: 9.2.0
-  citty:
-    specifier: ^0.1.5
-    version: 0.1.5
   eslint:
     specifier: ^8.53.0
     version: 8.54.0
@@ -1019,7 +1019,6 @@ packages:
     resolution: {integrity: sha512-AS7n5NSc0OQVMV9v6wt3ByujNIrne0/cTjiC2MYqhvao57VNfiuVksTSr2p17nVOhEr2KtqiAkGwHcgMC/qUuQ==}
     dependencies:
       consola: 3.2.3
-    dev: true
 
   /color-convert@1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}

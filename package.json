@@ -10,28 +10,29 @@
             "require": "./dist/index.cjs"
         }
     },
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.mjs",
     "bin": {
         "crayon": "./dist/index.mjs"
     },
-    "main": "./dist/index.cjs",
-    "module": "./dist/index.mjs",
     "files": [
         "dist"
     ],
     "scripts": {
         "build": "unbuild",
-        "lint:eslint": "eslint .",
-        "lint:prettier": "prettier -c ./src",
+        "generate:readme": "jiti ./build/generate-readme/index.ts",
         "lint": "pnpm run lint:eslint && pnpm run lint:prettier",
+        "lint:eslint": "eslint .",
         "lint:fix": "pnpm run lint:eslint --fix && pnpm run lint:prettier -w",
+        "lint:prettier": "prettier -c ./src",
         "prepack": "pnpm run build",
         "play": "jiti ./src/index.ts",
         "release": "sort-package-json && pnpm build && bumpp package.json packages/*/package.json --commit --push --tag && pnpm -r publish --access public",
-        "test": "pnpm lint && vitest run --coverage",
-        "generate:readme": "jiti ./build/generate-readme/index.ts"
+        "test": "pnpm lint && vitest run --coverage"
     },
     "dependencies": {
         "@clack/prompts": "^0.7.0",
+        "citty": "^0.1.5",
         "consola": "^3.2.3",
         "lodash.template": "^4.5.0",
         "pathe": "^1.1.1",
@@ -43,7 +44,6 @@
         "@types/lodash.template": "^4.5.3",
         "@types/node": "^20.8.10",
         "bumpp": "^9.2.0",
-        "citty": "^0.1.5",
         "eslint": "^8.53.0",
         "jiti": "^1.21.0",
         "prettier": "^3.0.3",
