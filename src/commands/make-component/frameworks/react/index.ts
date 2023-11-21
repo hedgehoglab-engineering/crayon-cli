@@ -1,84 +1,62 @@
-import { fileURLToPath } from 'url'
-import { resolve } from 'pathe'
-import template from 'lodash.template'
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { camelCase, kebabCase, pascalCase } from 'scule'
-import { type Prop } from '../props'
+import { type Prop } from '../../props'
 import { log } from '@clack/prompts'
 import config from '../../../../config'
+import { ejectStub, generateStub } from '../../stubs'
 
-const __dirname = fileURLToPath(new URL('.', import.meta.url))
-
-const componentStubPath = resolve(__dirname, './stubs/Component.tsx.stub')
-const storiesStubPath = resolve(__dirname, './stubs/Component.stories.tsx.stub')
-
-const defaultStubPath = (path: string) => resolve(__dirname, './stubs/', path)
-const ejectedStubPath = (path: string) =>
-  resolve(process.cwd(), '.crayon/commands/make-component/react/stubs/', path)
-
-function getStubPath(path: string) {
-  const defaultPath = defaultStubPath(path)
-  const ejectedPath = ejectedStubPath(path)
-
-  if (existsSync(ejectedPath)) {
-    return ejectedPath
+interface TemplateData {
+  component: {
+    name: {
+      pascal: ReturnType<typeof pascalCase>
+      kebab: ReturnType<typeof pascalCase>
+      camel: ReturnType<typeof pascalCase>
+    }
+    props: Prop[]
   }
-
-  return defaultPath
 }
 
 function generateComponentStub({
   componentName,
   path,
-  props,
+  templateData,
 }: {
   componentName: string
   path: string
-  props: Prop[]
+  templateData: TemplateData
 }) {
-  const componentTemplate = readFileSync(
-    getStubPath('Component.tsx.stub'),
-    'utf-8',
-  )
-  const compile = template(componentTemplate)
-
-  const compiled = compile({
-    component: {
-      name: {
-        pascal: pascalCase(componentName),
-        kebab: kebabCase(componentName),
-        camel: camelCase(componentName),
-      },
-
-      props,
-    },
+  generateStub({
+    fileName: `${componentName}.tsx`,
+    path,
+    templateData,
+    stubFile: 'Component.tsx.stub',
   })
-
-  if (!existsSync(path)) {
-    mkdirSync(path, {
-      recursive: true,
-    })
-  }
-
-  writeFileSync(resolve(path, `${componentName}.tsx`), compiled, 'utf-8')
 }
 
 function generateStoriesStub({
   componentName,
   path,
-  props,
+  templateData,
 }: {
   componentName: string
   path: string
-  props: Prop[]
+  templateData: TemplateData
 }) {
-  const componentTemplate = readFileSync(
-    getStubPath('Component.stories.tsx.stub'),
-    'utf-8',
-  )
-  const compile = template(componentTemplate)
+  generateStub({
+    fileName: `${componentName}.stories.tsx`,
+    path,
+    templateData,
+    stubFile: 'Component.stories.tsx.stub',
+  })
+}
 
-  const compiled = compile({
+function generateTemplateData({
+  componentName,
+  props,
+}: {
+  componentName: string
+  props: Prop[]
+}): TemplateData {
+  return {
     component: {
       name: {
         pascal: pascalCase(componentName),
@@ -88,19 +66,7 @@ function generateStoriesStub({
 
       props,
     },
-  })
-
-  if (!existsSync(path)) {
-    mkdirSync(path, {
-      recursive: true,
-    })
   }
-
-  writeFileSync(
-    resolve(path, `${componentName}.stories.tsx`),
-    compiled,
-    'utf-8',
-  )
 }
 
 export function run({
@@ -112,29 +78,22 @@ export function run({
   path: string
   props: Prop[]
 }) {
+  const templateData = generateTemplateData({
+    componentName,
+    props,
+  })
+
   generateComponentStub({
     componentName,
     path,
-    props,
+    templateData,
   })
 
   generateStoriesStub({
     componentName,
     path,
-    props,
+    templateData,
   })
-}
-
-function ejectStub(path: string) {
-  if (!existsSync(ejectedStubPath(''))) {
-    mkdirSync(ejectedStubPath(''), {
-      recursive: true,
-    })
-  }
-
-  const stubContent = readFileSync(defaultStubPath(path), 'utf-8')
-
-  writeFileSync(ejectedStubPath(path), stubContent, 'utf-8')
 }
 
 export function eject() {

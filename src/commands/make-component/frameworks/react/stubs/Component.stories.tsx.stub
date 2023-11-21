@@ -1,25 +1,38 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { type ComponentProps } from 'react'
 
-import <%- component.name.pascal > from './<%- component.name.pascal >'
+import <%- component.name.pascal %> from './<%- component.name.pascal %>'
 
-type <%- component.name.pascal >PropsAndCustomArgs = ComponentProps<typeof <%- component.name.pascal >> & {}
+type <%- component.name.pascal %>PropsAndCustomArgs = ComponentProps<typeof <%- component.name.pascal %>> & {}
 
-const meta: Meta<<%- component.name.pascal >PropsAndCustomArgs> = {
-  component: <%- component.name.pascal >,
+const meta: Meta<<%- component.name.pascal %>PropsAndCustomArgs> = {
+  component: <%- component.name.pascal %>,
   render: args => {
-    return <<%- component.name.pascal > {...args} />
+    return <<%- component.name.pascal %> {...args} />
   },
-  args: {
-    fullName: 'Christos Athanasiou',
-    profilePic: 'https://bit.ly/dan-abramov',
-    showProfile: false,
-    isActive: true,
-  },
+  <%= (() => {
+    const requiredProps = component.props.filter(({ required }) => required);
+
+    if (!requiredProps.length) {
+      return 'args: {},';
+    }
+
+    return `args: {
+${ requiredProps.map(({ name, defaultValue }) => `    ${ name }: ${ defaultValue },`).join('\n') }
+  },`;
+  })() %>
 }
 
 export default meta
 
-type Story = StoryObj<<%- component.name.pascal >PropsAndCustomArgs>
+type Story = StoryObj<<%- component.name.pascal %>PropsAndCustomArgs>
 
-export const Default: Story = {}
+export const <%- component.name.camel %>: Story = {}
+<%= component.props.filter(({ required }) => !required).map((prop) => {
+return `
+export const ${ prop.name }: Story = {
+  args: {
+    ${ prop.name }: ${ prop.defaultValue },
+  },
+}`
+}).join('\n') %>

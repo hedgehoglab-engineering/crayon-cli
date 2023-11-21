@@ -1,5 +1,4 @@
 import { defineCommand, runMain } from 'citty'
-import { version } from '../package.json'
 import { readFileSync } from 'fs'
 import { resolve } from 'pathe'
 import { fileURLToPath } from 'url'
@@ -8,14 +7,17 @@ import path from 'path'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+const pkgFile = path.join(process.cwd(), 'package.json')
+const pkg = JSON.parse(readFileSync(pkgFile, 'utf-8'))
+
 const main = defineCommand({
   meta: {
-    name: '@hedgehoglab/crayon',
-    version,
+    name: pkg.name,
+    version: pkg.version,
     description: 'Crayon CLI',
   },
 
-  setup({ rawArgs }) {
+  setup({ rawArgs }: any) {
     if (rawArgs.length) {
       return
     }

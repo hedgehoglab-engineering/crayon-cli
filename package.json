@@ -1,49 +1,55 @@
 {
-    "name": "@hedgehoglab/crayon",
+    "name": "@hedgehoglab/crayon-cli",
     "version": "0.0.0",
     "license": "MIT",
     "sideEffects": false,
     "type": "module",
     "exports": {
         ".": {
-            "types": "./dist/index.d.ts",
             "import": "./dist/index.mjs",
             "require": "./dist/index.cjs"
         }
     },
+    "bin": {
+        "crayon": "./dist/index.mjs"
+    },
     "main": "./dist/index.cjs",
     "module": "./dist/index.mjs",
-    "types": "./dist/index.d.ts",
     "files": [
         "dist"
     ],
     "scripts": {
         "build": "unbuild",
-        "dev": "vitest dev",
-        "lint": "eslint --cache --ext .ts,.js,.mjs,.cjs . && prettier -c src test",
-        "lint:fix": "eslint --cache --ext .ts,.js,.mjs,.cjs . --fix && prettier -c src test -w",
+        "lint:eslint": "eslint .",
+        "lint:prettier": "prettier -c ./src",
+        "lint": "pnpm run lint:eslint && pnpm run lint:prettier",
+        "lint:fix": "pnpm run lint:eslint --fix && pnpm run lint:prettier -w",
         "prepack": "pnpm run build",
         "play": "jiti ./src/index.ts",
-        "release": "pnpm test && changelogen --release --push && npm publish",
-        "test": "pnpm lint && vitest run --coverage"
+        "release": "sort-package-json && pnpm build && bumpp package.json packages/*/package.json --commit --push --tag && pnpm -r publish --access public",
+        "test": "pnpm lint && vitest run --coverage",
+        "generate:readme": "jiti ./build/generate-readme/index.ts"
     },
     "dependencies": {
         "@clack/prompts": "^0.7.0",
         "consola": "^3.2.3",
-        "lodash.template": "^4.5.0"
+        "lodash.template": "^4.5.0",
+        "pathe": "^1.1.1",
+        "scule": "^1.0.0"
     },
     "devDependencies": {
         "@hedgehoglab/eslint-config": "^0.1.8",
         "@hedgehoglab/prettier-config": "^0.1.8",
         "@types/lodash.template": "^4.5.3",
         "@types/node": "^20.8.10",
+        "bumpp": "^9.2.0",
+        "citty": "^0.1.5",
         "eslint": "^8.53.0",
         "jiti": "^1.21.0",
-        "pathe": "^1.1.1",
         "prettier": "^3.0.3",
-        "scule": "^1.0.0",
+        "rollup-plugin-copy": "^3.5.0",
+        "sort-package-json": "^2.6.0",
         "typescript": "^5.2.2",
         "unbuild": "^2.0.0"
-    },
-    "packageManager": "pnpm@8.10.2"
+    }
 }

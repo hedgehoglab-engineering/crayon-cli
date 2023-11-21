@@ -1,16 +1,11 @@
 import { defineCommand } from 'citty'
 
-import config, { ensureConfigExists } from '../../config'
-import { resolve } from 'pathe'
+import config from '../../config'
 
-import { fileURLToPath } from 'url'
 import { eject, run } from './frameworks/react'
 import { confirm, promptScope } from '../../prompts'
 import { intro, log, note, outro } from '@clack/prompts'
-import { defineProps, Prop } from './frameworks/props'
-import { CLIError } from '../../utils'
-
-const __dirname = fileURLToPath(new URL('.', import.meta.url))
+import { defineProps, Prop } from './props'
 
 export default defineCommand({
   meta: {
@@ -37,9 +32,7 @@ export default defineCommand({
   },
 
   async run({ args }) {
-    ensureConfigExists()
-
-    if (config === null) {
+    if (config?.framework === null) {
       return
     }
 
@@ -87,7 +80,7 @@ export default defineCommand({
           props
             .map(
               ({ name, type, required }) =>
-                `${name}${required ? '?' : ''}: ${type}`,
+                `${name}${required ? '' : '?'}: ${type}`,
             )
             .join('\n'),
           'Props:',

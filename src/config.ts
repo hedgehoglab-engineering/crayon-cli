@@ -9,7 +9,7 @@ export function configExists() {
   return existsSync(configPath)
 }
 
-let config: CrayonConfig | null = null
+let config: CrayonConfig | Record<string, never> = {}
 
 if (existsSync(configPath)) {
   config = JSON.parse(readFileSync(configPath, 'utf-8'))

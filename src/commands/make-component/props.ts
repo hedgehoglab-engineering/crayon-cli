@@ -1,44 +1,87 @@
-import { confirm, select, text } from '../../../prompts'
+import { confirm, select, text } from '../../prompts'
 import { camelCase } from 'scule'
 
-type BasicType = 'string' | 'string[]' | 'boolean' | '{}[]' | '{}'
+type BasicType =
+  | 'string'
+  | 'string[]'
+  | 'number'
+  | 'number[]'
+  | 'boolean'
+  | '{ id: string }[]'
+  | '{}'
+  | '() => void'
+  | 'any'
 
 export interface Prop {
   name: string
   type: BasicType
   required: boolean
+  defaultValue?: string
 }
 
-const typeOptions = [
+interface PropConfig {
+  label: string
+  type: BasicType
+  defaultPropValue: string
+}
+
+interface PropOption {
+  label: string
+  value: string
+}
+
+const propConfigs: PropConfig[] = [
   {
     label: 'String',
-    value: 'string',
+    type: 'string',
+    defaultPropValue: "'string'",
   },
   {
     label: 'Array of strings',
-    value: 'string[]',
+    type: 'string[]',
+    defaultPropValue: "['string 1', 'string 1']",
+  },
+  {
+    label: 'Number',
+    type: 'number',
+    defaultPropValue: '0',
+  },
+  {
+    label: 'Array of numbers',
+    type: 'number[]',
+    defaultPropValue: '[1, 2]',
   },
   {
     label: 'Boolean',
-    value: 'boolean',
+    type: 'boolean',
+    defaultPropValue: 'true',
   },
   {
     label: 'Object',
-    value: '{}',
+    type: '{}',
+    defaultPropValue: '{}',
   },
   {
     label: 'Array of objects',
-    value: '{}[]',
+    type: '{ id: string }[]',
+    defaultPropValue: "[{ id: 'string 1' }, { id: 'string 2' }]",
   },
   {
     label: 'Callback function',
-    value: '() => void',
+    type: '() => void',
+    defaultPropValue: '() => {}',
   },
   {
     label: 'Other',
-    value: 'any',
+    type: 'any',
+    defaultPropValue: "'string'",
   },
 ]
+
+const typeOptions: PropOption[] = propConfigs.map(({ label, type }) => ({
+  label,
+  value: type,
+}))
 
 async function defineProp(props: Prop[]): Promise<Prop> {
   const name = await text({
@@ -75,10 +118,13 @@ async function defineProp(props: Prop[]): Promise<Prop> {
     message: 'Is the prop required?',
   })
 
+  const propConfig: PropConfig = propConfigs.find(prop => prop.type === type)!
+
   return {
     name,
     type,
     required,
+    defaultValue: propConfig.defaultPropValue,
   }
 }
 

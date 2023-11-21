@@ -5,64 +5,31 @@ Crayon is a frontend CLI tool for bootstrapping and scaffolding frontend applica
 ## Installation
 
 ```bash
-yarn add @netsells/crayon-cli
+yarn add @hedgehoglab/crayon-cli
 ```
 
 Or without installation:
 
 ```bash
-npx @netsells/crayon-cli
+npx @hedgehoglab/crayon-cli
 ```
 
 ## Commands
 
 ```txt
-  crayon  — a frontend CLI tool for bootstrapping and scaffolding frontend applications. 
- 
-  .--.     ___ .-.      .---.   ___  ___    .--.    ___ .-.
- /    \   (   )   \    / .-, \ (   )(   )  /    \  (   )   \
-|  .-. ;   | ' .-. ;  (__) ; |  | |  | |  |  .-. ;  |  .-. .
-|  |(___)  |  / (___)   .'`  |  | |  | |  | |  | |  | |  | |
-|  |       | |         / .'| |  | '  | |  | |  | |  | |  | |
-|  | ___   | |        | /  | |  '  `-' |  | |  | |  | |  | |
-|  '(   )  | |        ; |  ; |   `.__. |  | '  | |  | |  | |
-'  `-' |   | |        ' `-'  |   ___ | |  '  `-' /  | |  | |
- `.__,'   (___)       `.__.'_.  (   )' |   `.__.'  (___)(___)
-                                 ; `-' '
-                                  .__.'
+  ___ _ __ __ _ _   _  ___  _ __
+ / __| '__/ _` | | | |/ _ \| '_ \
+| (__| | | (_| | |_| | (_) | | | |
+ \___|_|  \__,_|\__, |\___/|_| |_|
+                 __/ |
+                |___/
 
+Crayon CLI (@hedgehoglab/crayon-cli v0.0.0)
 
-  USAGE 
-  
-    ▸ crayon <command> [ARGUMENTS...] [OPTIONS...]
+USAGE @hedgehoglab/crayon init|make:component
 
+COMMANDS
 
-  COMMANDS — Type 'crayon help <command>' to get some help about a command
-
-    make:component                       Generate boilerplate for a new component               
-
-  GLOBAL OPTIONS
-
-    -h, --help                           Display global help or command-related help.           
-    -V, --version                        Display version.                                       
-    --no-color                           Disable use of colors in output.                       
-    -v, --verbose                        Verbose mode: will also output debug messages.         
-    --quiet                              Quiet mode - only displays warn and error messages.    
-    --silent                             Silent mode: does not output anything, giving no       
-                                         indication of success or failure other than the exit   
-                                         code.                                                  
-
-```
-
-## Contributing
-
-### Installation
-
-```bash
-# clone the repo
-git clone git@github.com:netsells/crayon-cli
-# cd into the directory
-cd crayon-cli
-# link the module for use elsewhere
-npm link
+            init    Initialise a crayon cli config in the current directory
+  make:component    Generate a component from boilerplate                  
 ```
