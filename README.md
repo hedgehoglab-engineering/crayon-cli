@@ -5,7 +5,7 @@ Crayon is a frontend CLI tool for bootstrapping and scaffolding frontend applica
 ## Installation
 
 ```bash
-yarn add @hedgehoglab/crayon-cli
+yarn add -D @hedgehoglab/crayon-cli
 ```
 
 Or without installation:
