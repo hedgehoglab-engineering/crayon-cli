@@ -10,7 +10,6 @@ export default defineBuildConfig({
       preserveModules: true,
     },
   },
-  externals: ['citty'],
   entries: [
     {
       builder: 'rollup',
@@ -30,9 +29,9 @@ export default defineBuildConfig({
               { src: './src/package.json', dest: 'dist/' },
               {
                 src: './src/**/*.stub',
-                dest: 'dist/',
+                dest: './dist/',
                 rename: (name, extension, fullPath) => {
-                  return fullPath
+                  return fullPath.replace('./src/', './')
                 },
               },
             ],
