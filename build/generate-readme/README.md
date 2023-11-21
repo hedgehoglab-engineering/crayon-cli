@@ -5,18 +5,20 @@ Crayon is a frontend CLI tool for bootstrapping and scaffolding frontend applica
 ## Installation
 
 ```bash
-yarn add @netsells/crayon-cli
+yarn add @hedgehoglab/crayon-cli
 ```
 
 Or without installation:
 
 ```bash
-npx @netsells/crayon-cli
+npx @hedgehoglab/crayon-cli
 ```
 
 ## Commands
 
-```txt{{CRAYON_OUTPUT}}```
+```txt
+{{CRAYON_OUTPUT}}
+```
 
 ## Contributing
 
@@ -24,7 +26,7 @@ npx @netsells/crayon-cli
 
 ```bash
 # clone the repo
-git clone git@github.com:netsells/crayon-cli
+git clone git@github.com:hedgehoglab-engineering/crayon-cli
 # cd into the directory
 cd crayon-cli
 # link the module for use elsewhere

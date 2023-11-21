@@ -1,36 +1,55 @@
 {
-    "name": "@netsells/crayon-cli",
-    "version": "1.0.4",
-    "main": "./src/index.js",
+    "name": "@hedgehoglab/crayon-cli",
+    "version": "0.1.0",
     "license": "MIT",
+    "sideEffects": false,
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.cjs"
+        }
+    },
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.mjs",
+    "bin": {
+        "crayon": "./dist/index.mjs"
+    },
+    "files": [
+        "dist"
+    ],
     "scripts": {
-        "lint": "eslint ./**/*.js --fix",
-        "generate": "node ./build/generate-readme"
+        "build": "unbuild",
+        "generate:readme": "jiti ./build/generate-readme/index.ts",
+        "lint": "pnpm run lint:eslint && pnpm run lint:prettier",
+        "lint:eslint": "eslint .",
+        "lint:fix": "pnpm run lint:eslint --fix && pnpm run lint:prettier -w",
+        "lint:prettier": "prettier -c ./src",
+        "prepack": "pnpm run build",
+        "play": "jiti ./src/index.ts",
+        "release": "sort-package-json && pnpm build && bumpp package.json packages/*/package.json --commit --push --tag && pnpm publish --access public",
+        "test": "pnpm lint && vitest run --coverage"
     },
     "dependencies": {
-        "@caporal/core": "^2.0.2",
-        "caporal": "^1.4.0",
-        "fs-extra": "^5.0.0",
-        "glob": "^7.1.2",
-        "inquirer": "^8.2.0",
-        "lodash.camelcase": "^4.3.0",
-        "lodash.kebabcase": "^4.1.1",
-        "lodash.replace": "^4.1.4",
-        "lodash.template": "^4.5.0"
+        "@clack/prompts": "^0.7.0",
+        "citty": "^0.1.5",
+        "consola": "^3.2.3",
+        "lodash.template": "^4.5.0",
+        "pathe": "^1.1.1",
+        "scule": "^1.0.0"
     },
     "devDependencies": {
-        "@netsells/eslint-config": "^5.1.0",
-        "eslint": "^7",
-        "eslint-plugin-jquery": "^1.5.1",
-        "eslint-plugin-require-jsdoc-except": "^1.5.0",
-        "husky": "^0.15.0-rc.8"
-    },
-    "bin": {
-        "crayon": "src/index.js"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "yarn lint && yarn generate && git add README.md"
-        }
+        "@hedgehoglab/eslint-config": "^0.1.8",
+        "@hedgehoglab/prettier-config": "^0.1.8",
+        "@types/lodash.template": "^4.5.3",
+        "@types/node": "^20.8.10",
+        "bumpp": "^9.2.0",
+        "eslint": "^8.53.0",
+        "jiti": "^1.21.0",
+        "prettier": "^3.0.3",
+        "rollup-plugin-copy": "^3.5.0",
+        "sort-package-json": "^2.6.0",
+        "typescript": "^5.2.2",
+        "unbuild": "^2.0.0"
     }
 }
