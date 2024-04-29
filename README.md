@@ -31,5 +31,5 @@ USAGE @hedgehoglab/crayon init|make:component
 COMMANDS
 
             init    Initialise a crayon cli config in the current directory
-  make:component    Generate a component from boilerplate                  
+  make:component    Generate a component from boilerplate
 ```

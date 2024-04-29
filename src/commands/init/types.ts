@@ -1,12 +1,12 @@
-import { FrameworkOption, TestRunner } from '../../types'
+import { FrameworkOption, TestRunner } from '../../types';
 
 export interface FrameworkSelectOption {
-  label: string
-  value: FrameworkOption
-  hint?: string
+    label: string;
+    value: FrameworkOption;
+    hint?: string;
 }
 
 export interface TestRunnerSelectOption {
-  label: string
-  value: TestRunner
+    label: string;
+    value: TestRunner;
 }

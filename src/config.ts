@@ -1,30 +1,23 @@
-import { resolve } from 'pathe'
-import { existsSync, readFileSync } from 'fs'
-import { CrayonConfig } from './types'
+import { CrayonConfig } from './types';
+import { loadConfig } from 'c12';
 
-const rootDir = process.cwd()
-const configPath = resolve(rootDir, './.crayonrc')
+const config = async () => {
+    const { config, configFile } = await loadConfig<CrayonConfig>({
+        name: 'crayon',
+        configFile: '.crayon.config',
+    });
 
-export function configExists() {
-  return existsSync(configPath)
-}
+    return config;
+};
 
-let config: CrayonConfig | Record<string, never> = {}
+export const configExists = async () => {
+    return (await config()) === null;
+};
 
-if (existsSync(configPath)) {
-  config = JSON.parse(readFileSync(configPath, 'utf-8'))
-}
+export const ensureConfigExists = async () => {
+    if (!(await configExists())) {
+        process.exit(1);
+    }
+};
 
-export function ensureConfigExists() {
-  if (!configExists()) {
-    process.exit(1)
-  }
-
-  if (config === null) {
-    process.exit(1)
-  }
-
-  // process.exit(1)
-}
-
-export default config
+export default config;

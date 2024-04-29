@@ -1,0 +1,31 @@
+import * as <%- component.name.pascal %> from './<%- component.name.pascal %>.stories';
+import {
+    generateSuite,
+    type VueWrapper,
+} from '@netsells/vue-storybook-test-utils';
+import { describe, beforeEach, test, expect } from 'vitest';
+
+const suite = generateSuite(<%- component.name.pascal %>);
+
+describe('<%- component.name.pascal %>', () => {
+    let wrapper: VueWrapper;
+
+    const <%- component.name.camel %> = () => wrapper.getComponent();
+
+    beforeEach(() => {
+        wrapper = suite.<%- component.name.camel %>();
+    });
+    <% if (!component.props.length) { %>
+    test.todo('something appropriate happens', () => {
+        expect(true).toBe(false);
+    });
+    <% } else { %>
+    <% component.props.forEach(({ name }) => { %>
+    describe('when the <%- name %> prop is provided', () => {
+        test.todo('something appropriate happens', () => {
+            expect(true).toBe(false);
+        });
+    });
+    <% }) %>
+    <% } %>
+});
