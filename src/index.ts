@@ -4,12 +4,19 @@ import { defineCommand, runMain } from 'citty';
 import { readFileSync } from 'fs';
 import { resolve, join, dirname } from 'pathe';
 import { fileURLToPath } from 'url';
+import type { PackageJson } from 'type-fest';
 
 export const __filename = fileURLToPath(import.meta.url);
 export const __dirname = dirname(__filename);
 
 const pkgFile = join(process.cwd(), 'package.json');
-const pkg = JSON.parse(readFileSync(pkgFile, 'utf-8'));
+const pkg: PackageJson = JSON.parse(readFileSync(pkgFile, 'utf-8'));
+
+if (process.argv.at(-1) === '--help') {
+    const logo = readFileSync(resolve(__dirname, './logo.txt'), 'utf-8');
+
+    console.log(logo);
+}
 
 const main = defineCommand({
     meta: {
@@ -22,10 +29,6 @@ const main = defineCommand({
         if (rawArgs.length) {
             return;
         }
-
-        const logo = readFileSync(resolve(__dirname, './logo.txt'), 'utf-8');
-
-        console.log(logo);
     },
 
     subCommands: {

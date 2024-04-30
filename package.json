@@ -30,8 +30,9 @@
         "lint:prettier": "prettier -c ./src",
         "prepack": "pnpm run build",
         "play": "jiti ./src/index.ts",
-        "release": "sort-package-json && pnpm build && bumpp package.json packages/*/package.json --commit --push --tag && pnpm publish --access public",
-        "test": "pnpm lint && vitest run --coverage"
+        "release": "sort-package-json && pnpm build && bumpp package.json packages/*/package.json --commit --push --tag --all && pnpm publish --access public",
+        "test": "pnpm lint && vitest run --coverage",
+        "version": "pnpm generate:readme"
     },
     "dependencies": {
         "@clack/prompts": "^0.7.0",
@@ -54,6 +55,7 @@
         "prettier": "^3.0.3",
         "rollup-plugin-copy": "^3.5.0",
         "sort-package-json": "^2.6.0",
+        "type-fest": "^4.18.0",
         "typescript": "^5.4.5",
         "unbuild": "^2.0.0"
     },

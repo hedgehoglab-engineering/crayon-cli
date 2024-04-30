@@ -7,30 +7,19 @@ const outputFile = `${__dirname}/../../README.md`;
 (() => {
     // Run the command and get the output
     try {
-        execSync('NO_COLOR=1 yarn play', {
+        const output = execSync('NO_COLOR=1 yarn play --help', {
             cwd: process.cwd(),
             encoding: 'utf-8',
         });
+
+        // Replace it in our readme template
+        const commandOutput = output.split('\n').slice(1).join('\n');
+
+        const readme = templateFile.replace('{{CRAYON_OUTPUT}}', commandOutput);
+
+        // Write the file
+        writeFileSync(outputFile, readme);
     } catch (e) {
-        if (
-            e instanceof Error &&
-            'stdout' in e &&
-            typeof e.stdout === 'string'
-        ) {
-            // Replace it in our readme template
-            const commandOutput = e.stdout.split('\n').slice(1, -5).join('\n');
-
-            const output = templateFile.replace(
-                '{{CRAYON_OUTPUT}}',
-                commandOutput,
-            );
-
-            // Write the file
-            writeFileSync(outputFile, output);
-
-            return;
-        }
-
         console.log(e);
     }
 })();
