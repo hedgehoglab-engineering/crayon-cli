@@ -17,7 +17,6 @@ npx @hedgehoglab/crayon-cli
 ## Commands
 
 ```txt
-$ jiti ./src/index.ts --help
   ___ _ __ __ _ _   _  ___  _ __
  / __| '__/ _` | | | |/ _ \| '_ \
 | (__| | | (_| | |_| | (_) | | | |
@@ -25,7 +24,7 @@ $ jiti ./src/index.ts --help
                  __/ |
                 |___/
 
-Crayon CLI (@hedgehoglab/crayon-cli v1.0.7)
+Crayon CLI (@hedgehoglab/crayon-cli v1.0.8)
 
 USAGE @hedgehoglab/crayon-cli init|make:component|config
 
