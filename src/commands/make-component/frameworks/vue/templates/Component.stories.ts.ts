@@ -88,7 +88,7 @@ ${requiredProps
             />
         \`,
     }),
-} satisfies Meta<typeof ${value.component.name.pascal}PropsAndCustomArgs>;
+} satisfies Meta<${value.component.name.pascal}PropsAndCustomArgs>;
 
 export default meta;
 
