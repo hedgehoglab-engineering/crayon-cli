@@ -10,8 +10,10 @@ import generateArgTypes from '@netsells/storybook-vue-generate-arg-types';
 import ${value.component.name.pascal} from './${
     value.component.name.pascal
 }.vue';
-import { argsKeys } from '../../../.storybook/helpers';
-import { useStorybookArgs } from '../../../composables/useStorybookArgs';
+import { argsKeys } from '${value.paths.fromRoot('.storybook/helpers')}';
+import { useStorybookArgs } from '${value.paths.fromRoot(
+    'composables/useStorybookArgs',
+)}';
 import type { Meta, StoryObj } from '@storybook/vue3';
 import type { ComponentProps } from 'vue-component-type-helpers';
 

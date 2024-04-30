@@ -25,4 +25,7 @@ export type TemplateData = {
         props: Prop[];
     };
     testRunner: TestRunner | undefined;
+    paths: {
+        fromRoot: (path: string) => string;
+    };
 };

@@ -15,6 +15,7 @@ export const run: FrameworkModule['run'] = async ({
 
     const templateData = generateTemplateData({
         componentName,
+        componentPath: path,
         props,
         testRunner: crayonConfig?.features?.tests
             ? crayonConfig?.features?.tests?.runner
