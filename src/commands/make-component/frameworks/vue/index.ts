@@ -1,97 +1,19 @@
-import { camelCase, kebabCase, pascalCase } from 'scule';
-import { type Prop } from '../../props';
 import { log } from '@clack/prompts';
 import config from '../../../../config';
-import { ejectStub, generateStub } from '../../stubs';
+import { ejectStubs, generateStubs } from '../../stubs';
+import type { FrameworkModule } from '../../types';
+import { generateTemplateData } from '../../utils';
+import component from './stubs/Component.vue';
+import { dirname, resolve } from 'pathe';
+import { fileURLToPath } from 'url';
 
-interface TemplateData {
-    component: {
-        name: {
-            pascal: ReturnType<typeof pascalCase>;
-            kebab: ReturnType<typeof pascalCase>;
-            camel: ReturnType<typeof pascalCase>;
-        };
-        props: Prop[];
-    };
-}
+export const __filename = fileURLToPath(import.meta.url);
+export const __dirname = dirname(__filename);
 
-const generateComponentStub = ({
-    componentName,
-    path,
-    templateData,
-}: {
-    componentName: string;
-    path: string;
-    templateData: TemplateData;
-}) => {
-    generateStub({
-        fileName: `${componentName}.vue`,
-        path,
-        templateData,
-        stubFile: 'Component.vue.stub',
-    });
-};
-
-const generateStoriesStub = ({
-    componentName,
-    path,
-    templateData,
-}: {
-    componentName: string;
-    path: string;
-    templateData: TemplateData;
-}) => {
-    generateStub({
-        fileName: `${componentName}.stories.ts`,
-        path,
-        templateData,
-        stubFile: 'Component.stories.ts.stub',
-    });
-};
-
-const generateTestsStub = ({
-    componentName,
-    path,
-    templateData,
-}: {
-    componentName: string;
-    path: string;
-    templateData: TemplateData;
-}) => {
-    generateStub({
-        fileName: `${componentName}.spec.ts`,
-        path,
-        templateData,
-        stubFile: 'Component.spec.ts.stub',
-    });
-};
-
-const generateTemplateData = ({
-    componentName,
-    props,
-}: {
-    componentName: string;
-    props: Prop[];
-}): TemplateData => ({
-    component: {
-        name: {
-            pascal: pascalCase(componentName),
-            kebab: kebabCase(componentName),
-            camel: camelCase(componentName),
-        },
-
-        props,
-    },
-});
-
-export const run = async ({
+export const run: FrameworkModule['run'] = async ({
     componentName,
     path,
     props,
-}: {
-    componentName: string;
-    path: string;
-    props: Prop[];
 }) => {
     const crayonConfig = await config();
 
@@ -100,42 +22,50 @@ export const run = async ({
         props,
     });
 
-    generateComponentStub({
+    const stubs = generateStubs({
+        componentFileName: 'Component.vue',
         componentName,
-        path,
+        outputPath: path,
         templateData,
     });
 
+    if (true) {
+        const customTemplatePath = resolve(__dirname, './CustomStub.vue.ts');
+
+        const custom = await import(customTemplatePath);
+
+        console.log({ custom: custom.default(templateData) });
+    }
+
+    console.log(component(templateData));
+
+    await stubs.component();
+
     if (crayonConfig?.features?.storybook) {
-        generateStoriesStub({
-            componentName,
-            path,
-            templateData,
-        });
+        await stubs.stories();
     }
 
     if (crayonConfig?.features?.tests) {
-        generateTestsStub({
-            componentName,
-            path,
-            templateData,
-        });
+        await stubs.tests();
     }
 };
 
-export const eject = async () => {
+export const eject: FrameworkModule['eject'] = async () => {
     const crayonConfig = await config();
+    const stubs = ejectStubs({
+        componentFileName: 'Component.vue',
+    });
 
-    await ejectStub('Component.vue.stub');
+    await stubs.component();
     log.success('Ejected Component.vue.stub');
 
     if (crayonConfig?.features?.storybook) {
-        await ejectStub('Component.stories.ts.stub');
+        await stubs.stories();
         log.success('Ejected Component.stories.ts.stub');
     }
 
     if (crayonConfig?.features?.tests) {
-        await ejectStub('Component.spec.ts.stub');
+        await stubs.tests();
         log.success('Ejected Component.spec.ts.stub');
     }
 };

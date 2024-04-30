@@ -1,8 +1,8 @@
 import { defineCommand } from 'citty';
-import { FrameworkSelectOption } from './types';
+import type { FrameworkSelectOption } from './types';
 import { readFileSync, writeFileSync } from 'fs';
 import { resolve } from 'pathe';
-import { CrayonConfig, FrameworkOption } from '../../types';
+import type { CrayonConfig, FrameworkOption } from '../../types';
 import { confirm, promptScope, select } from '../../prompts.js';
 
 export default defineCommand({

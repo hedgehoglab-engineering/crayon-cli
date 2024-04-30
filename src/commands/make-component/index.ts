@@ -6,7 +6,7 @@ import * as react from './frameworks/react';
 import * as vue from './frameworks/vue';
 import { confirm, promptScope } from '../../prompts';
 import { intro, log, note, outro } from '@clack/prompts';
-import { defineProps, Prop } from './props';
+import { defineProps, type Prop } from './props';
 
 const frameworks = {
     react,

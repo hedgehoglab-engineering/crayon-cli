@@ -2,7 +2,7 @@ import { defineBuildConfig } from 'unbuild';
 import copy from 'rollup-plugin-copy';
 
 export default defineBuildConfig({
-    declaration: false,
+    declaration: true,
     rollup: {
         inlineDependencies: true,
         emitCJS: true,

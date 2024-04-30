@@ -1,4 +1,4 @@
-import { CrayonConfig } from './types';
+import type { CrayonConfig } from './types';
 import { loadConfig } from 'c12';
 
 const config = async () => {

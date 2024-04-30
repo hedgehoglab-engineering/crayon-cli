@@ -1,0 +1,9 @@
+{
+    "name": "playground",
+    "dependencies": {
+        "crayon-cli": "file:../"
+    },
+    "scripts": {
+
+    }
+}

@@ -1,4 +1,4 @@
-import { FrameworkOption, TestRunner } from '../../types';
+import type { FrameworkOption, TestRunner } from '../../types';
 
 export interface FrameworkSelectOption {
     label: string;

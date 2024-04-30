@@ -2,14 +2,13 @@
 
 import { defineCommand, runMain } from 'citty';
 import { readFileSync } from 'fs';
-import { resolve } from 'pathe';
+import { resolve, join, dirname } from 'pathe';
 import { fileURLToPath } from 'url';
-import path from 'path';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+export const __filename = fileURLToPath(import.meta.url);
+export const __dirname = dirname(__filename);
 
-const pkgFile = path.join(process.cwd(), 'package.json');
+const pkgFile = join(process.cwd(), 'package.json');
 const pkg = JSON.parse(readFileSync(pkgFile, 'utf-8'));
 
 const main = defineCommand({
@@ -38,3 +37,6 @@ const main = defineCommand({
 });
 
 runMain(main);
+
+// Export our types
+export { type CrayonConfig } from './types';

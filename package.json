@@ -6,12 +6,14 @@
     "type": "module",
     "exports": {
         ".": {
+            "types": "./dist/index.d.ts",
             "import": "./dist/index.mjs",
             "require": "./dist/index.cjs"
         }
     },
     "main": "./dist/index.cjs",
     "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
     "bin": {
         "crayon": "./dist/index.mjs"
     },
@@ -21,6 +23,7 @@
     "scripts": {
         "build": "unbuild",
         "generate:readme": "jiti ./build/generate-readme/index.ts",
+        "check:types": "tsc -p ./tsconfig.json",
         "lint": "pnpm run lint:eslint && pnpm run lint:prettier",
         "lint:eslint": "eslint .",
         "lint:fix": "pnpm run lint:eslint --fix && pnpm run lint:prettier -w",
@@ -51,7 +54,7 @@
         "prettier": "^3.0.3",
         "rollup-plugin-copy": "^3.5.0",
         "sort-package-json": "^2.6.0",
-        "typescript": "^5.2.2",
+        "typescript": "^5.4.5",
         "unbuild": "^2.0.0"
     }
 }

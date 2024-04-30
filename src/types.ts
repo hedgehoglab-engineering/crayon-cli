@@ -1,18 +1,18 @@
 export type FrameworkOption = 'react' | 'vue';
 
-export type TestRunner = 'vitest' | 'other';
+export type TestRunner = 'vitest' | 'jest';
 
-export interface CrayonConfigFeatures {
+export type CrayonConfigFeatures = {
     tests?: boolean;
     storybook?: boolean;
-}
+};
 
-export interface CrayonConfigTests {
+export type CrayonConfigTests = {
     runner?: TestRunner;
-}
+};
 
-export interface CrayonConfig {
+export type CrayonConfig = {
     framework: FrameworkOption;
     features?: CrayonConfigFeatures;
     tests?: CrayonConfigTests;
-}
+};
