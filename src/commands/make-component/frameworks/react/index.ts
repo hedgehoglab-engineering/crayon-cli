@@ -1,8 +1,10 @@
-import { log } from '@clack/prompts';
 import config from '../../../../config';
-import { ejectStubs, generateStubs } from '../../stubs';
+import { ejectTemplates, generateTemplates } from '../../templates';
 import type { FrameworkModule } from '../../types';
 import { generateTemplateData } from '../../utils';
+import componentTemplate from './templates/Component.tsx';
+import storiesTemplate from './templates/Component.stories.ts';
+import testsTemplate from './templates/Component.spec.ts';
 
 export const run: FrameworkModule['run'] = async ({
     componentName,
@@ -14,40 +16,46 @@ export const run: FrameworkModule['run'] = async ({
     const templateData = generateTemplateData({
         componentName,
         props,
+        testRunner: crayonConfig?.features?.tests
+            ? crayonConfig?.features?.tests?.runner
+            : undefined,
     });
 
-    const stubs = generateStubs({
-        componentFileName: 'Component.vue',
+    const templates = generateTemplates({
         componentName,
         outputPath: path,
         templateData,
+        componentTemplate,
+        storiesTemplate,
+        testsTemplate,
     });
 
-    await stubs.component();
+    await templates.component();
 
     if (crayonConfig?.features?.storybook) {
-        await stubs.stories();
+        await templates.stories();
     }
 
     if (crayonConfig?.features?.tests) {
-        await stubs.tests();
+        await templates.tests();
     }
 };
 
 export const eject: FrameworkModule['eject'] = async () => {
     const crayonConfig = await config();
-    const stubs = ejectStubs();
+    const templates = await ejectTemplates({
+        componentFileName: 'Component.vue',
+    });
 
-    await stubs.component();
-    log.success('Ejected Component.ts.stub');
+    await templates.component();
 
     if (crayonConfig?.features?.storybook) {
-        await stubs.stories();
-        log.success('Ejected Component.stories.ts.stub');
+        await templates.stories();
     }
 
     if (crayonConfig?.features?.tests) {
-        await stubs.tests();
-        log.success('Ejected Component.spec.ts.stub');
+        await templates.tests();
     }
+
+    return templates.templatesPath;
 };

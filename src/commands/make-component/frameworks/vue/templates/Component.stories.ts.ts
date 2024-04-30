@@ -1,48 +1,56 @@
-/**
- * Stories for <%- component.name.pascal %>.
+import type { TemplateData } from '../../../types';
+
+export default (value: TemplateData) => `/**
+ * Stories for ${value.component.name.pascal}.
  *
  * @see https://storybook.js.org/docs/vue/essentials/controls
  */
 
 import generateArgTypes from '@netsells/storybook-vue-generate-arg-types';
-import <%- component.name.pascal %> from './<%- component.name.pascal %>.vue';
+import ${value.component.name.pascal} from './${
+    value.component.name.pascal
+}.vue';
 import { argsKeys } from '../../../.storybook/helpers';
 import { useStorybookArgs } from '../../../composables/useStorybookArgs';
 import type { Meta, StoryObj } from '@storybook/vue3';
 import type { ComponentProps } from 'vue-component-type-helpers';
 
-type <%- component.name.pascal %>PropsAndCustomArgs = ComponentProps<
-    typeof <%- component.name.pascal %>
-> & {}
+type ${value.component.name.pascal}PropsAndCustomArgs = ComponentProps<
+    typeof ${value.component.name.pascal}
+> & {};
 
 const meta = {
     /**
      * Set the component on the default export for props to be
      * automatically converted to args/controls.
      */
-    component: <%- component.name.pascal %>,
+    component: ${value.component.name.pascal},
     /**
      * Provide custom control types for your props.
      *
      * @see https://storybook.js.org/docs/vue/essentials/controls#annotation
      */
-    argTypes: generateArgTypes(<%- component.name.pascal %>),
+    argTypes: generateArgTypes(${value.component.name.pascal}),
     /**
      * Set any default props data on your component.
      *
      * @see https://storybook.js.org/docs/8.0/vue/writing-stories/args
      */
-    <%= (() => {
-    const requiredProps = component.props.filter(({ required }) => required);
+    ${(() => {
+        const requiredProps = value.component.props.filter(
+            ({ required }) => required,
+        );
 
-    if (!requiredProps.length) {
-        return 'args: {},';
-    }
+        if (!requiredProps.length) {
+            return 'args: {},';
+        }
 
-    return `args: {
-${ requiredProps.map(({ name, defaultValue }) => `        ${ name }: ${ defaultValue },`).join('\n') }
+        return `args: {
+${requiredProps
+    .map(({ name, defaultValue }) => `        ${name}: ${defaultValue},`)
+    .join('\n')}
     },`;
-    })() %>
+    })()}
     /**
      * Set any default parameters on your stories.
      *
@@ -58,11 +66,11 @@ ${ requiredProps.map(({ name, defaultValue }) => `        ${ name }: ${ defaultV
      * @see https://storybook.js.org/docs/8.0/vue/api/csf
      */
     render: (args, { argTypes }) => ({
-        name: '<%- component.name.kebab %>-story',
+        name: '${value.component.name.kebab}-story',
 
         props: argsKeys({ ...args, ...argTypes }),
 
-        components: { <%- component.name.pascal %> },
+        components: { ${value.component.name.pascal} },
 
         setup(props) {
             const { propArgs } = useStorybookArgs({ props, args });
@@ -72,26 +80,30 @@ ${ requiredProps.map(({ name, defaultValue }) => `        ${ name }: ${ defaultV
             };
         },
 
-        template: `
-            <<%- component.name.kebab %>
+        template: \`
+            <${value.component.name.kebab}
                 v-bind="propArgs"
             />
-        `,
+        \`,
     }),
-} satisfies Meta<typeof <%- component.name.pascal %>PropsAndCustomArgs>;
+} satisfies Meta<typeof ${value.component.name.pascal}PropsAndCustomArgs>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const <%- component.name.camel %>: Story = {
-    name: '<%- component.name.pascal %>',
+export const ${value.component.name.camel}: Story = {
+    name: '${value.component.name.pascal}',
 };
-<%= component.props.filter(({ required }) => !required).map((prop) => {
-return `
-export const ${ prop.name }: Story = {
+
+${value.component.props
+    .filter(({ required }) => !required)
+    .map(
+        (prop) => `export const ${prop.name}: Story = {
     args: {
-      ${ prop.name }: ${ prop.defaultValue },
+        ${prop.name}: ${prop.defaultValue},
     },
-}`
-}).join('\n') %>
+}`,
+    )
+    .join('\n\n')}
+`;

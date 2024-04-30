@@ -40,3 +40,4 @@ runMain(main);
 
 // Export our types
 export { type CrayonConfig } from './types';
+export { type TemplateData as MakeComponentTemplateData } from './commands/make-component/types';

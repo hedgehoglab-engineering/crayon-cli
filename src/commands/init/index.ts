@@ -1,14 +1,14 @@
 import { defineCommand } from 'citty';
-import type { FrameworkSelectOption } from './types';
+import type { FrameworkSelectOption, TestRunnerSelectOption } from './types';
 import { readFileSync, writeFileSync } from 'fs';
 import { resolve } from 'pathe';
-import type { CrayonConfig, FrameworkOption } from '../../types';
+import type { CrayonConfig, FrameworkOption, TestRunner } from '../../types';
 import { confirm, promptScope, select } from '../../prompts.js';
 
 export default defineCommand({
     meta: {
         name: 'init',
-        description: 'Initialise a crayon cli config in the current directory',
+        description: 'Initialise a Crayon CLI config in the current directory',
     },
 
     async run() {
@@ -19,8 +19,8 @@ export default defineCommand({
         );
 
         const dependencies = {
-            ...packageJson.dependencies,
-            ...packageJson.devDependencies,
+            ...(packageJson.dependencies ?? {}),
+            ...(packageJson.devDependencies ?? {}),
         };
 
         await promptScope(async ({ intro, outro }) => {
@@ -60,21 +60,73 @@ export default defineCommand({
             const storybookDetected = Object.keys(dependencies).some((name) =>
                 name.includes('storybook'),
             );
-            const storybook = await confirm({
+
+            const hasStorybook = await confirm({
                 message: 'Does this project use storybook?',
                 initialValue: storybookDetected,
             });
 
+            const vitestDetected = Object.keys(dependencies).some((name) =>
+                name.includes('vitest'),
+            );
+
+            const jestDetected = Object.keys(dependencies).some((name) =>
+                name.includes('jest'),
+            );
+
+            const hasTests = await confirm({
+                message: 'Does this project have unit tests?',
+                initialValue: vitestDetected || jestDetected,
+            });
+
+            let testRunner: TestRunner | undefined = undefined;
+
+            if (hasTests) {
+                const testRunners: TestRunnerSelectOption[] = [
+                    {
+                        label: 'Vitest',
+                        value: 'vitest',
+                        hint: vitestDetected ? '(detected)' : undefined,
+                    },
+                    {
+                        label: 'Jest',
+                        value: 'jest',
+                        hint: jestDetected ? '(detected)' : undefined,
+                    },
+                ];
+
+                testRunner = (await select({
+                    message: 'Select test runner:',
+                    options: testRunners,
+                    initialValue: vitestDetected
+                        ? 'vitest'
+                        : jestDetected
+                          ? 'jest'
+                          : undefined,
+                })) as TestRunner;
+            }
+
             const config: CrayonConfig = {
                 framework,
                 features: {
-                    storybook: storybook,
+                    storybook: hasStorybook,
+                    tests:
+                        hasTests && testRunner
+                            ? {
+                                  runner: testRunner,
+                              }
+                            : false,
                 },
             };
 
             writeFileSync(
                 configPath,
-                `const config = ${JSON.stringify(config, null, 4)};
+                `/**
+ * @type {import('@hedgehoglab/crayon-cli').CrayonConfig}
+ */
+const config = ${JSON.stringify(config, null, 4)
+                    .replace(/"([^"]+)":/g, '$1:')
+                    .replace(/"/g, "'")};
 
 export default config;
       `,

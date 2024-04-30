@@ -1,9 +1,8 @@
 {
     "name": "playground",
+    "type": "module",
+    "packageManager": "pnpm@8.0.0+",
     "dependencies": {
-        "crayon-cli": "file:../"
-    },
-    "scripts": {
-
+        "@hedgehoglab/crayon-cli": "file:../"
     }
 }

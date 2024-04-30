@@ -1,5 +1,6 @@
 import type { Prop } from './props';
 import { pascalCase } from 'scule';
+import type { TestRunner } from '../../types';
 
 export type FrameworkModuleRunConfig = {
     componentName: string;
@@ -8,8 +9,8 @@ export type FrameworkModuleRunConfig = {
 };
 
 export type FrameworkModule = {
-    run: (config: FrameworkModuleRunConfig) => void;
-    eject: () => void;
+    run: (config: FrameworkModuleRunConfig) => Promise<void>;
+    eject: () => Promise<string>;
 };
 
 type ComponentNameCaseVariants = {
@@ -23,4 +24,5 @@ export type TemplateData = {
         name: ComponentNameCaseVariants;
         props: Prop[];
     };
+    testRunner: TestRunner | undefined;
 };

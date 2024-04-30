@@ -1,12 +1,13 @@
 import type { FrameworkOption, TestRunner } from '../../types';
 
-export interface FrameworkSelectOption {
+export type FrameworkSelectOption = {
     label: string;
     value: FrameworkOption;
     hint?: string;
-}
+};
 
-export interface TestRunnerSelectOption {
+export type TestRunnerSelectOption = {
     label: string;
     value: TestRunner;
-}
+    hint?: string;
+};

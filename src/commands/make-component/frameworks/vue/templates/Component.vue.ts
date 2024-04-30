@@ -1,6 +1,9 @@
 import type { TemplateData } from '../../../types';
 
-export default (value: TemplateData): string => `<template>
+/**
+ * @type {import('../../../types.ts').TemplateData}
+ */
+export default (value: TemplateData) => `<template>
     <div class="${value.component.name.kebab}">
         ${value.component.name.pascal}
     </div>
@@ -11,10 +14,10 @@ export default (value: TemplateData): string => `<template>
         ${value.component.props
             .map(
                 ({ name, type, required }) =>
-                    `${name}${required ? '' : '?'}: ${type}`,
+                    `${name}${required ? '' : '?'}: ${type};`,
             )
-            .join(';\n        ')}
-    }
+            .join('\n        ')}
+    };
 
     const props = defineProps<${value.component.name.pascal}Props>();
 </script>

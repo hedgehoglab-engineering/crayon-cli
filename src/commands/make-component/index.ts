@@ -11,7 +11,7 @@ import { defineProps, type Prop } from './props';
 const frameworks = {
     react,
     vue,
-};
+} as const;
 
 export default defineCommand({
     meta: {
@@ -33,7 +33,7 @@ export default defineCommand({
 
         eject: {
             type: 'boolean',
-            description: 'Eject the template stubs',
+            description: 'Eject the templates',
         },
     },
 
@@ -49,11 +49,16 @@ export default defineCommand({
         }
 
         if (args.eject) {
-            intro('make:component');
+            intro('make:component --eject');
 
-            framework.eject();
+            const templatesPath = await framework.eject();
 
-            outro('Complete');
+            outro(
+                `Templates ejected at ${templatesPath.replace(
+                    process.cwd(),
+                    '.',
+                )}`,
+            );
 
             return;
         }
@@ -113,7 +118,7 @@ export default defineCommand({
                 return;
             }
 
-            framework.run({
+            await framework.run({
                 componentName,
                 path,
                 props,

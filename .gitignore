@@ -3,7 +3,9 @@ node_modules
 /package-lock.json
 /yarn.lock
 yarn-error.log
-.crayon
-.crayonrc
+.crayon.config.js
 dist
+/playground/.crayon/
 /playground/resources/
+/playground/pnpm-lock.yaml
+/playground/.crayon.config.js
