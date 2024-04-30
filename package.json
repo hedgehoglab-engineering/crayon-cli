@@ -1,6 +1,6 @@
 {
     "name": "@hedgehoglab/crayon-cli",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "license": "MIT",
     "sideEffects": false,
     "type": "module",
@@ -30,9 +30,9 @@
         "lint:prettier": "prettier -c ./src",
         "prepack": "pnpm run build",
         "play": "jiti ./src/index.ts",
-        "preversion": "sort-package-json && pnpm check:types && pnpm build",
         "release": "bumpp package.json packages/*/package.json --commit --push --tag --all && pnpm publish --access public",
         "test": "pnpm lint && vitest run --coverage",
+        "preversion": "sort-package-json && pnpm check:types && pnpm build",
         "version": "pnpm generate:readme"
     },
     "dependencies": {

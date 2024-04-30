@@ -25,7 +25,7 @@ $ jiti ./src/index.ts --help
                  __/ |
                 |___/
 
-Crayon CLI (@hedgehoglab/crayon-cli v1.0.5)
+Crayon CLI (@hedgehoglab/crayon-cli v1.0.6)
 
 USAGE @hedgehoglab/crayon-cli init|make:component|config
 
@@ -37,7 +37,7 @@ COMMANDS
 
 Use @hedgehoglab/crayon-cli <command> --help for more information about a command.
 
-Done in 0.28s.
+Done in 0.30s.
 
 ```
 
