@@ -40,14 +40,12 @@
         "c12": "^1.10.0",
         "citty": "^0.1.5",
         "consola": "^3.2.3",
-        "lodash.template": "^4.5.0",
         "pathe": "^1.1.1",
         "scule": "^1.0.0"
     },
     "devDependencies": {
         "@hedgehoglab/eslint-config": "^1.1.0",
         "@hedgehoglab/prettier-config": "^1.1.0",
-        "@types/lodash.template": "^4.5.3",
         "@types/node": "^20.8.10",
         "bumpp": "^9.2.0",
         "eslint": "^8.53.0",
