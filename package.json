@@ -1,10 +1,9 @@
 {
     "name": "@hedgehoglab/crayon-cli",
-    "version": "0.3.0",
+    "version": "1.0.0",
     "license": "MIT",
     "sideEffects": false,
     "type": "module",
-    "packageManager": "pnpm@8.0.0+",
     "exports": {
         ".": {
             "types": "./dist/index.d.ts",
@@ -23,8 +22,8 @@
     ],
     "scripts": {
         "build": "unbuild",
-        "generate:readme": "jiti ./build/generate-readme/index.ts",
         "check:types": "tsc -p ./tsconfig.json",
+        "generate:readme": "jiti ./build/generate-readme/index.ts",
         "lint": "pnpm run lint:eslint && pnpm run lint:prettier",
         "lint:eslint": "eslint .",
         "lint:fix": "pnpm run lint:eslint --fix && pnpm run lint:prettier -w",
@@ -57,5 +56,6 @@
         "sort-package-json": "^2.6.0",
         "typescript": "^5.4.5",
         "unbuild": "^2.0.0"
-    }
+    },
+    "packageManager": "pnpm@8.0.0+"
 }
