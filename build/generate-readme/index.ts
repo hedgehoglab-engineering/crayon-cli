@@ -13,7 +13,7 @@ const outputFile = `${__dirname}/../../README.md`;
         });
 
         // Replace it in our readme template
-        const commandOutput = output.split('\n').slice(1).join('\n');
+        const commandOutput = output.split('\n').slice(1, -2).join('\n');
 
         const readme = templateFile.replace('{{CRAYON_OUTPUT}}', commandOutput);
 
