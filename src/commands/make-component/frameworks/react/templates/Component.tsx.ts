@@ -20,12 +20,12 @@ export default function ${value.component.name.pascal}({
     ...boxProps
 }: ${value.component.name.pascal}Props) {
     return (
-      <Box
-          className={cx('${value.component.name.kebab}', className)}
-          {...boxProps}
-      >
-          ${value.component.name.pascal}
-      </Box>
+        <Box
+            className={cx('${value.component.name.kebab}', className)}
+            {...boxProps}
+        >
+            ${value.component.name.pascal}
+        </Box>
     );
 }
 `;

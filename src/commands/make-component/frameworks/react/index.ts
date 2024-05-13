@@ -3,7 +3,7 @@ import { ejectTemplates, generateTemplates } from '../../templates';
 import type { FrameworkModule } from '../../types';
 import { generateTemplateData } from '../../utils';
 import componentTemplate from './templates/Component.tsx';
-import storiesTemplate from './templates/Component.stories.ts';
+import storiesTemplate from './templates/Component.stories.tsx';
 import testsTemplate from './templates/Component.spec.ts';
 
 export const run: FrameworkModule['run'] = async ({
@@ -23,6 +23,7 @@ export const run: FrameworkModule['run'] = async ({
     });
 
     const templates = generateTemplates({
+        storiesFileName: 'Component.stories.tsx',
         componentName,
         outputPath: path,
         templateData,

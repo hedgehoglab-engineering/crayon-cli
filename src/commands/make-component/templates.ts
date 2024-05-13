@@ -100,6 +100,7 @@ export const ejectStub = async (path: string) => {
 export const generateTemplates = ({
     componentName,
     componentFileName = 'Component.tsx',
+    storiesFileName = 'Component.stories.ts',
     outputPath,
     templateData,
     componentTemplate,
@@ -108,6 +109,7 @@ export const generateTemplates = ({
 }: {
     componentName: string;
     componentFileName?: string;
+    storiesFileName?: string;
     outputPath: string;
     templateData: TemplateData;
     componentTemplate: (value: TemplateData) => string;
@@ -125,14 +127,11 @@ export const generateTemplates = ({
             }),
         stories: () =>
             generateTemplate({
-                fileName: 'Component.stories.ts'.replace(
-                    'Component',
-                    componentName,
-                ),
+                fileName: storiesFileName.replace('Component', componentName),
                 path: outputPath,
                 templateData,
                 template: storiesTemplate,
-                stubFile: 'Component.stories.ts',
+                stubFile: storiesFileName,
             }),
         tests: () =>
             generateTemplate({
