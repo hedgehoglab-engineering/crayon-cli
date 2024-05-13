@@ -12,6 +12,7 @@ type ${value.component.name.pascal}Props = BoxProps & {
                 `${name}${required ? '' : '?'}: ${type};`,
         )
         .join('\n    ')}
+    // Any additional props
 };
 
 export default function ${value.component.name.pascal}({

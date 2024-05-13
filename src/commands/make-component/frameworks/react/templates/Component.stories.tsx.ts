@@ -12,7 +12,9 @@ import type { ComponentProps } from 'react';
 
 type ${value.component.name.pascal}PropsAndCustomArgs = ComponentProps<
     typeof ${value.component.name.pascal}
-> & {};
+> & {
+    // Any additional args used to render the story
+};
 
 const meta = {
     /**
