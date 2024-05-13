@@ -6,9 +6,7 @@ export default (value: TemplateData) => `/**
  * @see https://storybook.js.org/docs/react/essentials/controls
  */
 
-import ${value.component.name.pascal} from './${
-    value.component.name.pascal
-}.tsx';
+import ${value.component.name.pascal} from './${value.component.name.pascal}';
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ComponentProps } from 'react';
 
