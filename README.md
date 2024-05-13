@@ -24,7 +24,7 @@ npx @hedgehoglab/crayon-cli
                  __/ |
                 |___/
 
-Crayon CLI (@hedgehoglab/crayon-cli v1.0.10)
+Crayon CLI (@hedgehoglab/crayon-cli v1.0.11)
 
 USAGE @hedgehoglab/crayon-cli init|make:component|config
 
