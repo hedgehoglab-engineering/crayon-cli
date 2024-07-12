@@ -10,7 +10,7 @@ export default (value: TemplateData) => `<template>
 </template>
 
 <script lang="ts" setup>
-    type ${value.component.name.pascal}Props = {
+    export type ${value.component.name.pascal}Props = {
         ${value.component.props
             .map(
                 ({ name, type, required }) =>

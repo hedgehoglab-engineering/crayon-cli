@@ -6,13 +6,14 @@ export default (value: TemplateData) => `/**
  * @see https://storybook.js.org/docs/react/essentials/controls
  */
 
-import ${value.component.name.pascal} from './${value.component.name.pascal}';
+import ${value.component.name.pascal}, { type ${
+    value.component.name.pascal
+}Props } from './${value.component.name.pascal}';
 import type { Meta, StoryObj } from '@storybook/react';
-import type { ComponentProps } from 'react';
 
-type ${value.component.name.pascal}PropsAndCustomArgs = ComponentProps<
-    typeof ${value.component.name.pascal}
-> & {
+interface ${value.component.name.pascal}PropsAndCustomArgs extends ${
+    value.component.name.pascal
+}Props {
     // Any additional args used to render the story
 };
 

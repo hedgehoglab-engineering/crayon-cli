@@ -7,19 +7,22 @@ export default (value: TemplateData) => `/**
  */
 
 import generateArgTypes from '@netsells/storybook-vue-generate-arg-types';
-import ${value.component.name.pascal} from './${
+import ${value.component.name.pascal}, { type ${
     value.component.name.pascal
-}.vue';
+}Props } from './${value.component.name.pascal}.vue';
 import { argsKeys } from '${value.paths.fromRoot('.storybook/helpers')}';
 import { useStorybookArgs } from '${value.paths.fromRoot(
     'composables/useStorybookArgs',
 )}';
 import type { Meta, StoryObj } from '@storybook/vue3';
-import type { ComponentProps } from 'vue-component-type-helpers';
 
-type ${value.component.name.pascal}PropsAndCustomArgs = ComponentProps<
-    typeof ${value.component.name.pascal}
-> & {};
+interface ${
+    value.component.name.pascal
+}PropsAndCustomArgs extends ComponentProps<
+    typeof ${value.component.name.pascal}Props
+> {
+    // Any additional args used to render the story
+};
 
 const meta = {
     /**

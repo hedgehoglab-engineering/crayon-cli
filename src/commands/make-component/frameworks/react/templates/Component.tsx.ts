@@ -5,7 +5,7 @@ export default (
 ) => `import { Box, type BoxProps } from '@chakra-ui/react';
 import { cx } from '@chakra-ui/utils';
 
-type ${value.component.name.pascal}Props = BoxProps & {
+interface ${value.component.name.pascal}Props extends BoxProps {
     ${value.component.props
         .map(
             ({ name, type, required }) =>
@@ -18,12 +18,12 @@ type ${value.component.name.pascal}Props = BoxProps & {
 export default function ${value.component.name.pascal}({
     ${value.component.props.map(({ name }) => `${name},`).join('\n    ')}
     className,
-    ...boxProps
+    ...passThroughProps
 }: ${value.component.name.pascal}Props) {
     return (
         <Box
             className={cx('${value.component.name.kebab}', className)}
-            {...boxProps}
+            {...passThroughProps}
         >
             ${value.component.name.pascal}
         </Box>
