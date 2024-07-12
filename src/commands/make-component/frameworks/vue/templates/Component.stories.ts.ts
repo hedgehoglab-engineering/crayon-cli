@@ -16,11 +16,9 @@ import { useStorybookArgs } from '${value.paths.fromRoot(
 )}';
 import type { Meta, StoryObj } from '@storybook/vue3';
 
-interface ${
+type ${value.component.name.pascal}PropsAndCustomArgs = ${
     value.component.name.pascal
-}PropsAndCustomArgs extends ComponentProps<
-    typeof ${value.component.name.pascal}Props
-> {
+}Props & {
     // Any additional args used to render the story
 };
 

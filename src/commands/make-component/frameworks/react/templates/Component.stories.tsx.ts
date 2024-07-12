@@ -10,10 +10,11 @@ import ${value.component.name.pascal}, { type ${
     value.component.name.pascal
 }Props } from './${value.component.name.pascal}';
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 
-interface ${value.component.name.pascal}PropsAndCustomArgs extends ${
+type ${value.component.name.pascal}PropsAndCustomArgs = ${
     value.component.name.pascal
-}Props {
+}Props & {
     // Any additional args used to render the story
 };
 

@@ -5,7 +5,7 @@ export default (
 ) => `import { Box, type BoxProps } from '@chakra-ui/react';
 import { cx } from '@chakra-ui/utils';
 
-interface ${value.component.name.pascal}Props extends BoxProps {
+export type ${value.component.name.pascal}Props = BoxProps & {
     ${value.component.props
         .map(
             ({ name, type, required }) =>
