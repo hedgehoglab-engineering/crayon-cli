@@ -10,7 +10,6 @@ import ${value.component.name.pascal}, { type ${
     value.component.name.pascal
 }Props } from './${value.component.name.pascal}';
 import type { Meta, StoryObj } from '@storybook/react';
-import type { ComponentProps } from 'react';
 
 type ${value.component.name.pascal}PropsAndCustomArgs = ${
     value.component.name.pascal
