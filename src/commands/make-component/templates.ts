@@ -149,13 +149,17 @@ export const generateTemplates = ({
 
 export const ejectTemplates = async ({
     componentFileName = 'Component.tsx',
+    storiesFileName = 'Component.stories.ts',
+    testsFileName = 'Component.spec.ts',
 }: {
     componentFileName?: string;
+    storiesFileName?: string;
+    testsFileName?: string;
 } = {}) => {
     return {
         component: () => ejectStub(componentFileName),
-        stories: () => ejectStub('Component.stories.ts'),
-        tests: () => ejectStub('Component.spec.ts'),
+        stories: () => ejectStub(storiesFileName),
+        tests: () => ejectStub(testsFileName),
         templatesPath: await ejectPath(),
     };
 };

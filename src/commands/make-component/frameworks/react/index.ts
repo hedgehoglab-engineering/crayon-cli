@@ -47,6 +47,7 @@ export const eject: FrameworkModule['eject'] = async () => {
     const crayonConfig = await config();
     const templates = await ejectTemplates({
         componentFileName: 'Component.tsx',
+        storiesFileName: 'Component.stories.tsx',
     });
 
     await templates.component();
