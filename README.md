@@ -17,6 +17,8 @@ npx @hedgehoglab/crayon-cli
 ## Commands
 
 ```txt
+> jiti ./src/index.ts "--help"
+
   ___ _ __ __ _ _   _  ___  _ __
  / __| '__/ _` | | | |/ _ \| '_ \
 | (__| | | (_| | |_| | (_) | | | |
@@ -24,7 +26,7 @@ npx @hedgehoglab/crayon-cli
                  __/ |
                 |___/
 
-Crayon CLI (@hedgehoglab/crayon-cli v1.0.11)
+Crayon CLI (@hedgehoglab/crayon-cli v1.1.4)
 
 USAGE @hedgehoglab/crayon-cli init|make:component|config
 
@@ -35,7 +37,6 @@ COMMANDS
           config    Output the current crayon cli config                   
 
 Use @hedgehoglab/crayon-cli <command> --help for more information about a command.
-
 ```
 
 ## Contributing
