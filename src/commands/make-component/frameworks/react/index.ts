@@ -46,7 +46,7 @@ export const run: FrameworkModule['run'] = async ({
 export const eject: FrameworkModule['eject'] = async () => {
     const crayonConfig = await config();
     const templates = await ejectTemplates({
-        componentFileName: 'Component.vue',
+        componentFileName: 'Component.tsx',
     });
 
     await templates.component();
